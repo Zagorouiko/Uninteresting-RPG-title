@@ -28,29 +28,35 @@ namespace Dragon.Character
             aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("walkTarget");
 
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
+            //cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
+            cameraRaycaster.onMouseOverWalkable += Walk;
         }
 
-
-        void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        private void Walk(Vector3 destination)
         {
-            switch (layerHit)
-            {
-                case enemyLayerNumber:
-                    // navigate to the enemy
-                    GameObject enemy = raycastHit.collider.gameObject;
-                    aiCharacterControl.SetTarget(enemy.transform);
-                    break;
-                case walkableLayerNumber:
-                    // navigate to point on the ground              
-                    walkTarget.transform.position = raycastHit.point;
-                    aiCharacterControl.SetTarget(walkTarget.transform);
-                    break;
-                default:
-                    Debug.LogWarning("Don't know how to handle mouse click for player movement");
-                    return;
-            }
+            walkTarget.transform.position = destination;
+            aiCharacterControl.SetTarget(walkTarget.transform);
         }
+
+        //void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        //{
+        //    switch (layerHit)
+        //    {
+        //        case enemyLayerNumber:
+        //            // navigate to the enemy
+        //            GameObject enemy = raycastHit.collider.gameObject;
+        //            aiCharacterControl.SetTarget(enemy.transform);
+        //            break;
+        //        case walkableLayerNumber:
+        //            // navigate to point on the ground              
+        //            walkTarget.transform.position = raycastHit.point;
+        //            aiCharacterControl.SetTarget(walkTarget.transform);
+        //            break;
+        //        default:
+        //            Debug.LogWarning("Don't know how to handle mouse click for player movement");
+        //            return;
+        //    }
+        //}
 
         //TODO make this get called again
         void ProcessDirectMovement()
