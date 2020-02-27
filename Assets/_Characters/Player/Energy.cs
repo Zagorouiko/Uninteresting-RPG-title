@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using Dragon.CameraUI;
 
@@ -11,24 +9,26 @@ namespace Dragon.Character
         [SerializeField] RawImage energyBar;
         [SerializeField] float maxEnergyPoints = 100f;
 
-        CameraRaycaster cameraRaycaster = null;
         float pointsPerHit = 10f;
         float currentEnergyPoints;
         float energyAsPercentage { get { return currentEnergyPoints / maxEnergyPoints; } }
 
+        CameraRaycaster cameraRaycaster;
+
         void Start()
         {
             SetCurrentMaxEnergy();
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();           
-            cameraRaycaster.notifyRightClickObservers += ProcessRightClick;
+            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
         }
 
-        private void ProcessRightClick(RaycastHit raycastHit, int layerHit)
+        private void OnMouseOverEnemy(Enemy enemy)
         {
-            UseEnergyPoints();
-            UpdateEnergyBar();
+            if(Input.GetMouseButtonDown(1)) {
+                UseEnergyPoints();
+                UpdateEnergyBar();
+            }       
         }
-
         private void UpdateEnergyBar()
         {
             float xValue = -(energyAsPercentage / 2f) - 0.5f;

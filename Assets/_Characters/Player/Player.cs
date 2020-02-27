@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Dragon.Core;
 using Dragon.Weapons;
-using System;
 
 namespace Dragon.Character
 {
@@ -25,8 +22,6 @@ namespace Dragon.Character
         {
             currentHealthPoints = maxHealthPoints;
         }
-
-
 
         private void PutWeaponInHand()
         {

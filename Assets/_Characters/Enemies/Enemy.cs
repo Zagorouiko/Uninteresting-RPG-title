@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Dragon.Character;
+﻿using UnityEngine;
 using Dragon.Core;
 using Dragon.Weapons;
 

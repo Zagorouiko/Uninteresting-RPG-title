@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Dragon.CameraUI;
 using Dragon.Weapons;
 
@@ -11,19 +8,33 @@ namespace Dragon.Character
     {
 
         CameraRaycaster cameraRaycaster = null;
-        int enemyLayer = 9;       
         float damagerPerHit = 10f;     
         float lastHitTime = 0f;
 
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Weapon weaponInUse;
         Animator animator;
+        AICharacterControl aiCharacterControl = null;
+
+        public delegate void OnMouseRightClick(Vector3 destination);
+        public event OnMouseRightClick onMouseRightClick;
 
         void Start()
         {
+            aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            cameraRaycaster.notifyMouseClickObservers += ProcessAttackClick;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
             SetupRuntimeAnimator();
+        }
+
+        private void OnMouseOverEnemy(Enemy enemy)
+        {
+            var enemyGameObject = enemy.gameObject;
+            if (Input.GetMouseButton(0) && IsTargetInRange(enemyGameObject))
+            {
+                aiCharacterControl.SetTarget(enemy.transform);
+                DoDamage(enemyGameObject);
+            }
         }
 
         private void SetupRuntimeAnimator()
@@ -33,19 +44,7 @@ namespace Dragon.Character
             animatorOverrideController["Default Attack"] = weaponInUse.GetAttackAnimation();
         }
 
-        private void ProcessAttackClick(RaycastHit raycastHit, int layerHit)
-        {
-            if (layerHit == enemyLayer)
-            {
-                GameObject enemy = raycastHit.collider.gameObject;
-                if (IsTargetInRange(enemy, layerHit))
-                {
-                    DoDamage(enemy);
-                }
-            }           
-        }
-
-        private bool IsTargetInRange(GameObject enemy, int layerHit)
+        private bool IsTargetInRange(GameObject enemy)
         {
             float distanceToEnemy = (enemy.transform.position - transform.position).magnitude;
             return distanceToEnemy <= weaponInUse.GetAttackRange();
