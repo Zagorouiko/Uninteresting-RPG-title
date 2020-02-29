@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Dragon.CameraUI;
 using Dragon.Weapons;
+using System;
 
 namespace Dragon.Character
 {
@@ -11,19 +12,23 @@ namespace Dragon.Character
 
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Weapon weaponInUse;
-        [SerializeField] SpecialAbilityConfig ability1;
+        [SerializeField] SpecialAbilityConfig ability;
+
         Animator animator;
-        AICharacterControl aiCharacterControl = null;
-        CameraRaycaster cameraRaycaster = null;
+        Energy energyComponent;
+        AICharacterControl aiCharacterControl;
+        CameraRaycaster cameraRaycaster;
 
         public delegate void OnMouseRightClick(Vector3 destination);
         public event OnMouseRightClick onMouseRightClick;
 
         void Start()
         {
-            ability1.AddComponent(gameObject);
+            ability.AddComponent(gameObject);
+            energyComponent = GetComponent<Energy>();           
             aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
             SetupRuntimeAnimator();
         }
@@ -35,6 +40,21 @@ namespace Dragon.Character
             {
                 aiCharacterControl.SetTarget(enemy.transform);
                 DoDamage(enemyGameObject);
+            }
+
+            if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyGameObject))
+            {
+                AttemptSpecialAbility(enemy);
+            }
+        }
+
+        private void AttemptSpecialAbility(Enemy enemy)
+        {
+            if (energyComponent.isEnergyAvailable(ability.energyCost))
+            {
+                energyComponent.UseEnergyPoints(ability.energyCost);
+                var powerAttackConfig = (PowerAttackConfig)ability;
+                float extraDamage = powerAttackConfig.extraDamage + damagerPerHit;               
             }
         }
 

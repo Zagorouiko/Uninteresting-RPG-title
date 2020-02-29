@@ -7,7 +7,7 @@ namespace Dragon.Character
 {    public abstract class SpecialAbilityConfig : ScriptableObject
     {
         [Header("Special Ability General")]
-        [SerializeField] float energyCost = 10f;
+        public float energyCost = 10f;
 
         abstract public ISpecialAbility AddComponent(GameObject gameObjectToAttachTo);
     }
