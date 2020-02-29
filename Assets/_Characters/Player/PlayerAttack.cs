@@ -10,21 +10,18 @@ namespace Dragon.Character
         float damagerPerHit = 10f;     
         float lastHitTime = 0f;
 
-        [SerializeField] AnimatorOverrideController animatorOverrideController;
-        [SerializeField] Weapon weaponInUse;
-        [SerializeField] SpecialAbilityConfig ability;
+        [SerializeField] AnimatorOverrideController animatorOverrideController = null;
+        [SerializeField] Weapon weaponInUse = null;
+        //[SerializeField] SpecialAbilityConfig[] abilities;
 
         Animator animator;
         Energy energyComponent;
         AICharacterControl aiCharacterControl;
         CameraRaycaster cameraRaycaster;
 
-        public delegate void OnMouseRightClick(Vector3 destination);
-        public event OnMouseRightClick onMouseRightClick;
-
         void Start()
         {
-            ability.AddComponent(gameObject);
+            //abilities[0].AddComponent(gameObject);
             energyComponent = GetComponent<Energy>();           
             aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
@@ -42,21 +39,22 @@ namespace Dragon.Character
                 DoDamage(enemyGameObject);
             }
 
-            if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyGameObject))
-            {
-                AttemptSpecialAbility(enemy);
-            }
+            //if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyGameObject))
+            //{
+            //    AttemptSpecialAbility(0, enemy);
+            //}
         }
 
-        private void AttemptSpecialAbility(Enemy enemy)
-        {
-            if (energyComponent.isEnergyAvailable(ability.energyCost))
-            {
-                energyComponent.UseEnergyPoints(ability.energyCost);
-                var powerAttackConfig = (PowerAttackConfig)ability;
-                float extraDamage = powerAttackConfig.extraDamage + damagerPerHit;               
-            }
-        }
+        //private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
+        //{
+        //    if (energyComponent.isEnergyAvailable(abilities[abilityIndex].energyCost))
+        //    {
+        //        abilities[abilityIndex].Use();
+        //        energyComponent.UseEnergyPoints(abilities.energyCost);
+        //        var powerAttackConfig = (PowerAttackConfig)abilities;
+        //        float extraDamage = powerAttackConfig.extraDamage + damagerPerHit;
+        //    }
+        //}
 
         private void SetupRuntimeAnimator()
         {

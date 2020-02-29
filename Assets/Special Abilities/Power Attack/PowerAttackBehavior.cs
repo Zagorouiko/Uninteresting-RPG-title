@@ -25,7 +25,7 @@ namespace Dragon.Character
 
         public void Use()
         {
-
+            print("Power attack use");
         }
     }
 }

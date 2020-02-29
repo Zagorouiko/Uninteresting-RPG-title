@@ -9,11 +9,11 @@ namespace Dragon.Character
     {
         [Header("Power Attack specific")]
         public float extraDamage = 50f;
-        public override ISpecialAbility AddComponent(GameObject gameObjectToAttachTo)
+        public override void AddComponent(GameObject gameObjectToAttachTo)
         {
             var behaviorComponent = gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
             behaviorComponent.SetConfig(this);
-            return behaviorComponent;
+            behavior = behaviorComponent;
         }
 
     }

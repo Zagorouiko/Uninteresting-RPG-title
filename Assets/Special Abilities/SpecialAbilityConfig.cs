@@ -9,7 +9,14 @@ namespace Dragon.Character
         [Header("Special Ability General")]
         public float energyCost = 10f;
 
-        abstract public ISpecialAbility AddComponent(GameObject gameObjectToAttachTo);
+        protected ISpecialAbility behavior;
+
+        abstract public void AddComponent(GameObject gameObjectToAttachTo);
+
+        public void Use()
+        {
+            behavior.Use();
+        }
     }
 }
 
