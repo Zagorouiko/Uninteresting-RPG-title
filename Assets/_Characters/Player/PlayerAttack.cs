@@ -5,22 +5,23 @@ using Dragon.Weapons;
 namespace Dragon.Character
 {
     public class PlayerAttack : MonoBehaviour
-    {
-
-        CameraRaycaster cameraRaycaster = null;
+    {       
         float damagerPerHit = 10f;     
         float lastHitTime = 0f;
 
         [SerializeField] AnimatorOverrideController animatorOverrideController;
         [SerializeField] Weapon weaponInUse;
+        [SerializeField] SpecialAbilityConfig ability1;
         Animator animator;
         AICharacterControl aiCharacterControl = null;
+        CameraRaycaster cameraRaycaster = null;
 
         public delegate void OnMouseRightClick(Vector3 destination);
         public event OnMouseRightClick onMouseRightClick;
 
         void Start()
         {
+            ability1.AddComponent(gameObject);
             aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
