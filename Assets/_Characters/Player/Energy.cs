@@ -21,7 +21,7 @@ namespace Dragon.Character
             currentEnergyPoints = maxEnergyPoints;
         }
 
-        public bool isEnergyAvailable(float energyAmount)
+        public bool IsEnergyAvailable(float energyAmount)
         {
             return energyAmount <= currentEnergyPoints;
         }

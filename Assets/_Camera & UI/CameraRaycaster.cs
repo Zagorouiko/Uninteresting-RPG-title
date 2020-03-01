@@ -33,6 +33,7 @@ namespace Dragon.CameraUI {
 		void PerformRaycasts()
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
 			if (RaycastforEnemy(ray)) { return; }
 			if (RaycastforWalkable(ray)) { return; }
 		}

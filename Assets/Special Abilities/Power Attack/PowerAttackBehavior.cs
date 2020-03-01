@@ -11,21 +11,12 @@ namespace Dragon.Character
         {
             config = configToSet;
         } 
-        // Start is called before the first frame update
-        void Start()
+
+        public void Use(AbilityUseParams useParams)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        public void Use()
-        {
-            print("Power attack use");
+            print("Power attack used by: " + gameObject.name);
+            float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
+            useParams.target.TakeDamage(damageToDeal);
         }
     }
 }
