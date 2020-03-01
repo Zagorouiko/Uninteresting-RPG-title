@@ -8,7 +8,7 @@ namespace Dragon.Character
     public class PowerAttackConfig : SpecialAbility
     {
         [Header("Power Attack specific")]
-        [SerializeField] public float extraDamage = 1f;
+        [SerializeField] float extraDamage = 1f;
         public override void AttachComponentTo(GameObject gameObjectToAttachTo)
         {
             var behaviorComponent = gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();

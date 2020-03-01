@@ -41,9 +41,10 @@ namespace Dragon.Character
 
             if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyGameObject))
             {
+                
                 AttemptSpecialAbility(0, enemy);
             }
-        }
+        }   
 
         private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
         {
