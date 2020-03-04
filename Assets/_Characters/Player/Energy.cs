@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Dragon.Character
@@ -7,6 +8,7 @@ namespace Dragon.Character
     {
         [SerializeField] RawImage energyBar;
         [SerializeField] float maxEnergyPoints = 100f;
+        [SerializeField] float regenPointsPerSecond = 5f;
 
         float currentEnergyPoints;
         float energyAsPercentage { get { return currentEnergyPoints / maxEnergyPoints; } }
@@ -14,6 +16,21 @@ namespace Dragon.Character
         void Start()
         {
             SetCurrentMaxEnergy();
+        }
+
+        private void Update()
+        {
+           if (currentEnergyPoints < maxEnergyPoints)
+            {
+                AddEnergyPoints();
+                UpdateEnergyBar();
+            }
+        }
+
+        private void AddEnergyPoints()
+        {
+            var pointsToAdd = regenPointsPerSecond * Time.deltaTime;
+            currentEnergyPoints = Mathf.Clamp(currentEnergyPoints + pointsToAdd, 0 ,maxEnergyPoints);
         }
 
         private void SetCurrentMaxEnergy()
