@@ -6,11 +6,11 @@ namespace Dragon.Character
 {
     public class Energy : MonoBehaviour
     {
-        [SerializeField] RawImage energyBar;
+        [SerializeField] Image energyOrb;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 5f;
 
-        float currentEnergyPoints;
+        public float currentEnergyPoints;
         float energyAsPercentage { get { return currentEnergyPoints / maxEnergyPoints; } }
 
         void Start()
@@ -45,8 +45,7 @@ namespace Dragon.Character
 
         private void UpdateEnergyBar()
         {
-            float xValue = -(energyAsPercentage / 2f) - 0.5f;
-            energyBar.uvRect = new Rect(xValue, 0f, 0.5f, 1f);
+            energyOrb.fillAmount = energyAsPercentage;
         }
 
         public void UseEnergyPoints(float pointsPerHit)

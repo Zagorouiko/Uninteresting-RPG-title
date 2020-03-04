@@ -7,7 +7,7 @@ namespace Dragon.Character
 {
     public class PlayerAttack : MonoBehaviour
     {       
-        float baseDamage = 10f;     
+        float baseDamage = 25f;     
         float lastHitTime = 0f;
 
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
@@ -40,8 +40,7 @@ namespace Dragon.Character
             }
 
             if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyGameObject))
-            {
-                
+            {               
                 AttemptSpecialAbility(0, enemy);
             }
         }   
@@ -50,7 +49,7 @@ namespace Dragon.Character
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
-
+            print(energyComponent.IsEnergyAvailable(energyCost));
             if (energyComponent.IsEnergyAvailable(energyCost))
             {
                 energyComponent.UseEnergyPoints(energyCost);

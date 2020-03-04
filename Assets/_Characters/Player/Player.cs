@@ -12,6 +12,8 @@ namespace Dragon.Character
     {
         float currentHealthPoints = 100f;
         float maxHealthPoints = 100f;
+        float regenPointsPerSecond = 5f;
+        bool playerDies;
 
         [SerializeField] Weapon weaponInUse;     
         [SerializeField] GameObject weaponSocket;
@@ -28,6 +30,13 @@ namespace Dragon.Character
             audioSource = GetComponent<AudioSource>();
             SetCurrentMaxHealth();
             PutWeaponInHand();            
+        }
+        private void Update()
+        {
+            if (!playerDies)
+            {
+                RegenHealthPoints();
+            }        
         }
 
         private void SetCurrentMaxHealth()
@@ -47,7 +56,7 @@ namespace Dragon.Character
 
         public void TakeDamage(float damage)
         {
-            bool playerDies = (currentHealthPoints - damage <= 0);
+            playerDies = (currentHealthPoints - damage <= 0);
             if (playerDies) {
                 ReduceHealth(damage);              
                 StartCoroutine(KillPlayer());
@@ -76,7 +85,7 @@ namespace Dragon.Character
         {
             PlayDeathSound();
             animator.SetTrigger(DEATH_TRIGGER);
-            yield return new WaitForSecondsRealtime(3f);
+            yield return new WaitForSecondsRealtime(4f);
 
             SceneManager.LoadScene(0);
         }
@@ -84,6 +93,12 @@ namespace Dragon.Character
         private void ReduceHealth(float damage)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+        }
+
+        private void RegenHealthPoints()
+        {
+            var pointsToAdd = regenPointsPerSecond * Time.deltaTime;
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints + pointsToAdd, 0, maxHealthPoints);
         }
     }
 }

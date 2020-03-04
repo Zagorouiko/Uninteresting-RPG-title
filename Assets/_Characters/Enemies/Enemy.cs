@@ -10,7 +10,7 @@ namespace Dragon.Character
         float maxHealthPoints = 100f;
 
         bool isAttacking = false;
-        float damagePerShot = 10f;
+        float damagePerShot = 5f;
 
         Vector3 aimOffset = new Vector3(0, 1f, 0);
         [SerializeField] float secondBetweenShots = 0.5f;
@@ -40,20 +40,17 @@ namespace Dragon.Character
                 aiCharacterControl.enabled = false;
                 Destroy(this);
             }
-
             MoveTowardPlayer();
         }
 
         private void MoveTowardPlayer()
         {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
                 float randomisedDelay = Random.Range(secondBetweenShots - variation, secondBetweenShots + variation);
                 InvokeRepeating("FireProjectile", 0f, randomisedDelay);
-
             }
 
             if (distanceToPlayer > attackRadius && isAttacking)

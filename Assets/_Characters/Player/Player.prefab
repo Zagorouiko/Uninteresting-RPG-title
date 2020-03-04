@@ -1658,8 +1658,8 @@ GameObject:
   - component: {fileID: 2261343017275746146}
   - component: {fileID: -358282107159401711}
   - component: {fileID: 1864604346}
-  - component: {fileID: 1325941000}
   - component: {fileID: 522197181}
+  - component: {fileID: 522197194}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -1881,21 +1881,6 @@ MonoBehaviour:
   weaponInUse: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3, type: 2}
   abilities:
   - {fileID: 11400000, guid: 9a08f0d49496fe247b6b6d7a4fdeaab4, type: 2}
---- !u!114 &1325941000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682303348925593807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e196deca89f1aa94492b7f7ed383cf29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energyBar: {fileID: 0}
-  maxEnergyPoints: 100
-  regenPointsPerSecond: 5
 --- !u!82 &522197181
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1992,6 +1977,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &522197194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682303348925593807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e196deca89f1aa94492b7f7ed383cf29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyOrb: {fileID: 0}
+  maxEnergyPoints: 100
+  regenPointsPerSecond: 5
+  currentEnergyPoints: 0
 --- !u!1 &6682303348925594027
 GameObject:
   m_ObjectHideFlags: 0
