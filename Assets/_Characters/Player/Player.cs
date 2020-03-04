@@ -1,6 +1,9 @@
 ﻿ using UnityEngine;
 using Dragon.Core;
 using Dragon.Weapons;
+using System;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Dragon.Character
 {
@@ -35,8 +38,25 @@ namespace Dragon.Character
 
         public void TakeDamage(float damage)
         {
+            bool playerDies = (currentHealthPoints - damage <= 0);
+            if (playerDies) {
+                ReduceHealth(damage);
+                StartCoroutine(KillPlayer());
+            } else
+            {
+                ReduceHealth(damage);
+            }                    
+        }
+
+        IEnumerator KillPlayer()
+        {
+            yield return new WaitForSecondsRealtime(2f);
+            SceneManager.LoadScene(0);
+        }
+
+        private void ReduceHealth(float damage)
+        {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            // if (currentHealthPoints <= 0) { Destroy(gameObject); }
         }
     }
 }
