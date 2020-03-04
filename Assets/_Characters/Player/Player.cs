@@ -4,6 +4,7 @@ using Dragon.Weapons;
 using System;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace Dragon.Character
 {
@@ -14,9 +15,14 @@ namespace Dragon.Character
 
         [SerializeField] Weapon weaponInUse;     
         [SerializeField] GameObject weaponSocket;
+        [SerializeField] AudioClip[] damageSounds;
+        [SerializeField] AudioClip[] deathSounds;
+
+        AudioSource audioSource;
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             SetCurrentMaxHealth();
             PutWeaponInHand();            
         }
@@ -41,11 +47,27 @@ namespace Dragon.Character
             bool playerDies = (currentHealthPoints - damage <= 0);
             if (playerDies) {
                 ReduceHealth(damage);
+                PlayDeathSound();
                 StartCoroutine(KillPlayer());
             } else
             {
+                PlayDamageSound();
                 ReduceHealth(damage);
             }                    
+        }
+
+        public void PlayDamageSound()
+        {
+            var randomNumber = Random.Range(0, damageSounds.Length);
+            audioSource.clip = damageSounds[randomNumber];
+            audioSource.Play();
+        }
+
+        public void PlayDeathSound()
+        {
+            var randomNumber = Random.Range(0, deathSounds.Length);
+            audioSource.clip = deathSounds[randomNumber];
+            audioSource.Play();
         }
 
         IEnumerator KillPlayer()
