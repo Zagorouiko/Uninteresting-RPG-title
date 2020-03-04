@@ -18,10 +18,13 @@ namespace Dragon.Character
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
 
+        const string DEATH_TRIGGER = "New Trigger 0";
         AudioSource audioSource;
+        Animator animator;
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
             SetCurrentMaxHealth();
             PutWeaponInHand();            
@@ -46,8 +49,7 @@ namespace Dragon.Character
         {
             bool playerDies = (currentHealthPoints - damage <= 0);
             if (playerDies) {
-                ReduceHealth(damage);
-                PlayDeathSound();
+                ReduceHealth(damage);              
                 StartCoroutine(KillPlayer());
             } else
             {
@@ -72,7 +74,10 @@ namespace Dragon.Character
 
         IEnumerator KillPlayer()
         {
-            yield return new WaitForSecondsRealtime(2f);
+            PlayDeathSound();
+            animator.SetTrigger(DEATH_TRIGGER);
+            yield return new WaitForSecondsRealtime(3f);
+
             SceneManager.LoadScene(0);
         }
 

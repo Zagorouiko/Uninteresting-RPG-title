@@ -13,8 +13,8 @@ namespace Dragon.Character
         float damagePerShot = 10f;
 
         Vector3 aimOffset = new Vector3(0, 1f, 0);
-        float secondBetweenShots = 0.5f;
-
+        [SerializeField] float secondBetweenShots = 0.5f;
+        [SerializeField] float variation = 0.1f;
         [SerializeField] float moveRadius = 7f;
         [SerializeField] float attackRadius = 5f;
         
@@ -28,7 +28,7 @@ namespace Dragon.Character
 
         private void Start()
         {
-            player = FindObjectOfType<Player>();
+            player = FindObjectOfType<Player>();           
             aiCharacterControl = GetComponent<AICharacterControl>();
         }
 
@@ -37,15 +37,22 @@ namespace Dragon.Character
             if (player.healthAsPercentage <= Mathf.Epsilon)
             {
                 StopAllCoroutines();
+                aiCharacterControl.enabled = false;
                 Destroy(this);
             }
 
+            MoveTowardPlayer();
+        }
+
+        private void MoveTowardPlayer()
+        {
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
-                InvokeRepeating("FireProjectile", 0f, secondBetweenShots);
+                float randomisedDelay = Random.Range(secondBetweenShots - variation, secondBetweenShots + variation);
+                InvokeRepeating("FireProjectile", 0f, randomisedDelay);
 
             }
 
