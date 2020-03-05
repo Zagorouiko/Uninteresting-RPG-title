@@ -22,6 +22,7 @@ namespace Dragon.Character
     {
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
+        [SerializeField] GameObject particlePrefab = null;
         protected ISpecialAbility behavior;
 
         abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
@@ -34,6 +35,11 @@ namespace Dragon.Character
         public float GetEnergyCost()
         {
             return energyCost;
+        }
+
+        public GameObject GetParticlesPrefab()
+        {
+            return particlePrefab;
         }
 
 

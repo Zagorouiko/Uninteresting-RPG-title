@@ -18,10 +18,11 @@ namespace Dragon.CameraUI {
 		[SerializeField] Texture2D walkCursor = null;
 		[SerializeField] Vector2 cursorHotspot = new Vector2(0, 0);
 
-		Rect screenRectAtStartPlay = new Rect(0, 0, Screen.width, Screen.height);
+		Rect screenRectOnConstruction = new Rect();
 
 		void Update()
 		{
+			screenRectOnConstruction = new Rect(0, 0, Screen.width, Screen.height);
 			// Check if pointer is over an interactable UI element
 			if (EventSystem.current.IsPointerOverGameObject())
 			{
@@ -34,7 +35,7 @@ namespace Dragon.CameraUI {
 
 		void PerformRaycasts()
 		{
-			if (screenRectAtStartPlay.Contains(Input.mousePosition))
+			if (screenRectOnConstruction.Contains(Input.mousePosition))
 			{
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if (RaycastforEnemy(ray)) { return; }
