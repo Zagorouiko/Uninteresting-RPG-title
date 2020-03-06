@@ -2,6 +2,7 @@
 using Dragon.CameraUI;
 using Dragon.Weapons;
 using System;
+using System.Collections.Generic;
 
 namespace Dragon.Character
 {
@@ -12,17 +13,18 @@ namespace Dragon.Character
 
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;
         [SerializeField] Weapon weaponInUse = null;
-        [SerializeField] SpecialAbility[] abilities;
+        [SerializeField] AbilityConfig[] abilities;
+        [Range(.1f, 1f)] [SerializeField] float criticalHitChance = .1f;
+        [SerializeField] float criticalHitMultiplier = 1.25f;
 
+        Enemy enemy = null;
         Animator animator;
-        Energy energyComponent;
         AICharacterControl aiCharacterControl;
         CameraRaycaster cameraRaycaster;
 
         void Start()
-        {
-            abilities[0].AttachComponentTo(gameObject);
-            energyComponent = GetComponent<Energy>();           
+        {         
+            AttachInitialAbilities();
             aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
 
@@ -30,22 +32,46 @@ namespace Dragon.Character
             SetupRuntimeAnimator();
         }
 
-        private void OnMouseOverEnemy(Enemy enemy)
+        private void Update()
         {
-            var enemyGameObject = enemy.gameObject;
-            if (Input.GetMouseButton(0) && IsTargetInRange(enemyGameObject))
-            {
-                aiCharacterControl.SetTarget(enemy.transform);
-                DoDamage(enemyGameObject);
-            }
+            ScanForAbilityDown();
+        }
 
-            if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemyGameObject))
-            {               
-                AttemptSpecialAbility(0, enemy);
+        private void AttachInitialAbilities()
+        {
+            for (int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
+            {
+                abilities[abilityIndex].AttachComponentTo(gameObject);
             }
         }
 
-        private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
+        private void ScanForAbilityDown()
+        {
+            for (int keyIndex = 1; keyIndex < abilities.Length; keyIndex++)
+            {
+                if (Input.GetKeyDown(keyIndex.ToString()))
+                {
+                    AttemptSpecialAbility(keyIndex);
+                }
+            }
+        }
+
+        private void OnMouseOverEnemy(Enemy enemyToSet)
+        {
+            enemy = enemyToSet;
+            if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
+            {
+                aiCharacterControl.SetTarget(enemy.transform);
+                DoDamage(enemy);
+            }
+
+            if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
+            {               
+                AttemptSpecialAbility(0);
+            }
+        }
+
+        private void AttemptSpecialAbility(int abilityIndex)
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
@@ -64,20 +90,33 @@ namespace Dragon.Character
             animatorOverrideController["Default Attack"] = weaponInUse.GetAttackAnimation();
         }
 
-        private bool IsTargetInRange(GameObject enemy)
+        private bool IsTargetInRange(Enemy enemy)
         {
             float distanceToEnemy = (enemy.transform.position - transform.position).magnitude;
             return distanceToEnemy <= weaponInUse.GetAttackRange();
         }
 
-        private void DoDamage(GameObject enemy)
+        private void DoDamage(Enemy enemy)
         {
             if (Time.time - lastHitTime > weaponInUse.GetminTimeBetweenHits())
             {
                 animator.SetTrigger("New Trigger");
-                enemy.GetComponent<Enemy>().AdjustHealth(baseDamage);
+                enemy.TakeDamage(CalculateDamage());
                 lastHitTime = Time.time;
             }
+        }
+
+        private float CalculateDamage()
+        {
+            var randomNumber = UnityEngine.Random.Range(0, 1);
+            if (randomNumber <= criticalHitChance)
+            {
+                return (baseDamage + weaponInUse.GetAdditionalDamage()) * criticalHitMultiplier;
+            } else
+            {
+                return (baseDamage + weaponInUse.GetAdditionalDamage());
+            }
+            
         }
     }
 }

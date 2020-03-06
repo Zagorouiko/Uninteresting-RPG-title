@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dragon.Character
 {
     [CreateAssetMenu(menuName = ("RPG/SpecialAbility/Self Heal"))]
-    public class SelfHealConfig : SpecialAbility
+    public class SelfHealConfig : AbilityConfig
     {
         [Header("Self Heal specific")]
         [SerializeField] float extraHealth = 25f;

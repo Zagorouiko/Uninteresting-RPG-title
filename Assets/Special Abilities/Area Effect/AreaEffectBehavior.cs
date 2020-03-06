@@ -23,7 +23,7 @@ namespace Dragon.Character
             PlayParticleEffect();
         }
 
-        private void PlayParticleEffect() // PARTICLES NOT PLAYING
+        private void PlayParticleEffect()
         {
             GameObject prefab = Instantiate(config.GetParticlesPrefab(), transform.position, Quaternion.identity);
             myParticleSystem = prefab.GetComponent<ParticleSystem>();
@@ -44,10 +44,11 @@ namespace Dragon.Character
             foreach (RaycastHit hit in hits)
             {
                 var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
-                if (damageable != null)
+                bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+                if (damageable != null && !hitPlayer)
                 {
                     float damageToDeal = useParams.baseDamage + config.GetDamage();
-                    damageable.AdjustHealth(damageToDeal);
+                    damageable.TakeDamage(damageToDeal);
                 }
 
             }

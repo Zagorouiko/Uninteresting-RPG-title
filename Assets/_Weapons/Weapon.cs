@@ -10,6 +10,7 @@ namespace Dragon.Weapons
         public Transform gripTransform;
         [SerializeField] float minTimeBetweenHits;
         [SerializeField] float attackRange;
+        [SerializeField] float additionalDamage;
 
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
@@ -33,6 +34,11 @@ namespace Dragon.Weapons
         public float GetAttackRange()
         {
             return attackRange;
+        }
+
+        public float GetAdditionalDamage()
+        {
+            return additionalDamage;
         }
 
         private void RemoveAnimationEvents()

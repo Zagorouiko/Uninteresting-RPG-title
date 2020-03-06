@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dragon.Character
 {
     [CreateAssetMenu(menuName = ("RPG/SpecialAbility/Area Effect"))]
-    public class AreaEffectConfig : SpecialAbility
+    public class AreaEffectConfig : AbilityConfig
     {
         [Header("Area Effect specific")]
         [SerializeField] float Radius = 5f;

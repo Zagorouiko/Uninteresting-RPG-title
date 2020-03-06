@@ -18,11 +18,13 @@ namespace Dragon.Character
     }
 
 
-    public abstract class SpecialAbility : ScriptableObject
+    public abstract class AbilityConfig : ScriptableObject
     {
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
         [SerializeField] GameObject particlePrefab = null;
+        [SerializeField] AudioClip audioClip;
+
         protected ISpecialAbility behavior;
 
         abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
@@ -42,16 +44,16 @@ namespace Dragon.Character
             return particlePrefab;
         }
 
+        public AudioClip GetAudioClip()
+        {
+            return audioClip;
+        }
+
 
     }
     public interface ISpecialAbility
     {
         void Use(AbilityUseParams useParams);
-    }
-
-    public interface ISpecialAbilityHeal
-    {
-        void Use();
     }
 }
 

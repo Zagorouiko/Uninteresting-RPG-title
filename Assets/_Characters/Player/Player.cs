@@ -13,7 +13,7 @@ namespace Dragon.Character
         public float currentHealthPoints = 100f;
         float maxHealthPoints = 100f;
         float regenPointsPerSecond = 5f;
-        bool playerDies;
+        bool isPlayerDead;
 
         [SerializeField] Weapon weaponInUse;     
         [SerializeField] GameObject weaponSocket;
@@ -33,10 +33,10 @@ namespace Dragon.Character
         }
         private void Update()
         {
-            if (!playerDies)
+            if (!isPlayerDead)
             {
                 RegenHealthPoints();
-            }        
+            }               
         }
 
         private void SetCurrentMaxHealth()
@@ -54,10 +54,10 @@ namespace Dragon.Character
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
-        public void AdjustHealth(float damage)
+        public void TakeDamage(float damage)
         {
-            playerDies = (currentHealthPoints - damage <= 0);
-            if (playerDies) {
+            isPlayerDead = (currentHealthPoints - damage <= 0);
+            if (isPlayerDead) {
                 ReduceHealth(damage);              
                 StartCoroutine(KillPlayer());
             } else
@@ -88,6 +88,11 @@ namespace Dragon.Character
             yield return new WaitForSecondsRealtime(4f);
 
             SceneManager.LoadScene(0);
+        }
+
+        public void Heal(float healAmount)
+        {
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints + healAmount, 0, maxHealthPoints);
         }
 
         private void ReduceHealth(float damage)

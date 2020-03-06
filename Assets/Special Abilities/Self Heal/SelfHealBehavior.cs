@@ -19,7 +19,10 @@ namespace Dragon.Character
 
         public void Use(AbilityUseParams useParams)
         {
-            player.AdjustHealth(-config.GetExtraHealth());
+            var playerAudioSource = player.GetComponent<AudioSource>();
+            playerAudioSource.clip = config.GetAudioClip();
+            playerAudioSource.Play();
+            player.Heal(config.GetExtraHealth());
         }
     }
 }

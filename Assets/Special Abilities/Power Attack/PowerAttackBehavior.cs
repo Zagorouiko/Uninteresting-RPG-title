@@ -15,7 +15,7 @@ namespace Dragon.Character
         public void Use(AbilityUseParams useParams)
         {
             float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
-            useParams.target.AdjustHealth(damageToDeal);
+            useParams.target.TakeDamage(damageToDeal);
         }
     }
 }

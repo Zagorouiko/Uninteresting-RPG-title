@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dragon.Character
 {
     [CreateAssetMenu(menuName = ("RPG/SpecialAbility/Power Attack"))]
-    public class PowerAttackConfig : SpecialAbility
+    public class PowerAttackConfig : AbilityConfig
     {
         [Header("Power Attack specific")]
         [SerializeField] float extraDamage = 1f;
