@@ -10,7 +10,7 @@ namespace Dragon.Character
 {
     public class Player : MonoBehaviour, IDamageable
     {
-        float currentHealthPoints = 100f;
+        public float currentHealthPoints = 100f;
         float maxHealthPoints = 100f;
         float regenPointsPerSecond = 5f;
         bool playerDies;
@@ -54,7 +54,7 @@ namespace Dragon.Character
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
-        public void TakeDamage(float damage)
+        public void AdjustHealth(float damage)
         {
             playerDies = (currentHealthPoints - damage <= 0);
             if (playerDies) {

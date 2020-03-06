@@ -48,5 +48,10 @@ namespace Dragon.Character
     {
         void Use(AbilityUseParams useParams);
     }
+
+    public interface ISpecialAbilityHeal
+    {
+        void Use();
+    }
 }
 

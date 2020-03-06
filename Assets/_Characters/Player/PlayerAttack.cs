@@ -43,13 +43,12 @@ namespace Dragon.Character
             {               
                 AttemptSpecialAbility(0, enemy);
             }
-        }   
+        }
 
         private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
-            print(energyComponent.IsEnergyAvailable(energyCost));
             if (energyComponent.IsEnergyAvailable(energyCost))
             {
                 energyComponent.UseEnergyPoints(energyCost);
@@ -76,7 +75,7 @@ namespace Dragon.Character
             if (Time.time - lastHitTime > weaponInUse.GetminTimeBetweenHits())
             {
                 animator.SetTrigger("New Trigger");
-                enemy.GetComponent<Enemy>().TakeDamage(baseDamage);
+                enemy.GetComponent<Enemy>().AdjustHealth(baseDamage);
                 lastHitTime = Time.time;
             }
         }

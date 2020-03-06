@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d96c981baaf8efd43ba72d26b42aeb4a, type: 3}
-  m_Name: AreaEffect1
+  m_Name: AOE 1
   m_EditorClassIdentifier: 
   energyCost: 50
+  particlePrefab: {fileID: 1554814232447225341, guid: 8878288cb51bdc948b1080466ef13a65,
+    type: 3}
   Radius: 5
   DamageToEachTarget: 15

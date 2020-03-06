@@ -38,7 +38,7 @@ namespace Dragon.Weapons {
             Component damageableComponent = other.gameObject.GetComponent(typeof(IDamageable));
             if (damageableComponent)
             {
-                (damageableComponent as IDamageable).TakeDamage(damageCaused);
+                (damageableComponent as IDamageable).AdjustHealth(damageCaused);
             }
         }
 

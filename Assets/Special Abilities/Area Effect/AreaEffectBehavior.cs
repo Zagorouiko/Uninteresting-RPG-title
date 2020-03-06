@@ -9,6 +9,7 @@ namespace Dragon.Character
     public class AreaEffectBehavior : MonoBehaviour, ISpecialAbility
     {
         AreaEffectConfig config;
+        ParticleSystem myParticleSystem;
 
 
         public void SetConfig(AreaEffectConfig configToSet)
@@ -22,12 +23,12 @@ namespace Dragon.Character
             PlayParticleEffect();
         }
 
-        private void PlayParticleEffect()
+        private void PlayParticleEffect() // PARTICLES NOT PLAYING
         {
             GameObject prefab = Instantiate(config.GetParticlesPrefab(), transform.position, Quaternion.identity);
-            var particleSystem = prefab.GetComponent<ParticleSystem>();
-            particleSystem.Play();
-            Destroy(prefab, particleSystem.main.duration);                 
+            myParticleSystem = prefab.GetComponent<ParticleSystem>();
+            myParticleSystem.Play();
+            Destroy(prefab, myParticleSystem.main.duration);                 
         }
 
         private void DealRadialDamage(AbilityUseParams useParams)
@@ -46,7 +47,7 @@ namespace Dragon.Character
                 if (damageable != null)
                 {
                     float damageToDeal = useParams.baseDamage + config.GetDamage();
-                    damageable.TakeDamage(damageToDeal);
+                    damageable.AdjustHealth(damageToDeal);
                 }
 
             }

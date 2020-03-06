@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b869fdbcb13c94e4dbdb0d5e63d00d89, type: 3}
-  m_Name: Power Attack 1
+  m_Script: {fileID: 11500000, guid: 0a3308172e482f6418446212f47d4b6f, type: 3}
+  m_Name: Self Heal 1
   m_EditorClassIdentifier: 
-  energyCost: 25
-  particlePrefab: {fileID: 5695228035687092521, guid: 8e2d6ad5e45d1eb4a888ff25e1f18c34,
-    type: 3}
-  extraDamage: 1
+  energyCost: 10
+  particlePrefab: {fileID: 0}
+  extraHealth: 25

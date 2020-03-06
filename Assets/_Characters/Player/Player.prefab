@@ -1881,7 +1881,7 @@ MonoBehaviour:
     type: 2}
   weaponInUse: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3, type: 2}
   abilities:
-  - {fileID: 11400000, guid: 3cf88cca82085214788db014137f2a81, type: 2}
+  - {fileID: 11400000, guid: ec2c145a8e75c61479d272e2c424489e, type: 2}
   - {fileID: 11400000, guid: 9a08f0d49496fe247b6b6d7a4fdeaab4, type: 2}
   - {fileID: 11400000, guid: 9a08f0d49496fe247b6b6d7a4fdeaab4, type: 2}
 --- !u!82 &522197181
@@ -3116,6 +3116,36 @@ Transform:
   m_Father: {fileID: 6682303348925382841}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7939671975856404852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2745845365261003715}
+  m_Layer: 0
+  m_Name: Self heal 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2745845365261003715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939671975856404852}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2980341262064954189}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8656474605919749336
 GameObject:
   m_ObjectHideFlags: 0
@@ -3146,6 +3176,7 @@ Transform:
   - {fileID: 7609122555061526171}
   - {fileID: 682965113591842964}
   - {fileID: 350777377074522829}
+  - {fileID: 2745845365261003715}
   m_Father: {fileID: 5670884867636858875}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3216,7 +3247,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Power Attack 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7771291439074234864, guid: 036e88cc1e2f69d4ba64ea74bc981bf5, type: 3}
+    - {fileID: 5441627587682024720, guid: 036e88cc1e2f69d4ba64ea74bc981bf5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 036e88cc1e2f69d4ba64ea74bc981bf5, type: 3}
 --- !u!4 &682965113591842964 stripped
 Transform:
@@ -3291,7 +3324,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8120907169217965432, guid: 8878288cb51bdc948b1080466ef13a65, type: 3}
+    - {fileID: 56420957398041983, guid: 8878288cb51bdc948b1080466ef13a65, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8878288cb51bdc948b1080466ef13a65, type: 3}
 --- !u!4 &350777377074522829 stripped
 Transform:
@@ -3366,7 +3401,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Power Attack 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7907446616805559324, guid: 8e2d6ad5e45d1eb4a888ff25e1f18c34, type: 3}
+    - {fileID: 6299215745889890453, guid: 8e2d6ad5e45d1eb4a888ff25e1f18c34, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8e2d6ad5e45d1eb4a888ff25e1f18c34, type: 3}
 --- !u!4 &7609122555061526171 stripped
 Transform:
