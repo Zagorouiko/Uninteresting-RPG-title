@@ -7,35 +7,16 @@ using System;
 namespace Dragon.Character
 {
     public class AreaEffectBehavior : AbilityBehavior
-    {
-        AreaEffectConfig config;
-        ParticleSystem myParticleSystem;
-
-
-        public void SetConfig(AreaEffectConfig configToSet)
-        {
-            config = configToSet;
-        }
-
+    {      
         public override void Use(AbilityUseParams useParams)
         {
             DealRadialDamage(useParams);
             PlayParticleEffect();
-        }
-
-
-
-        private void PlayParticleEffect()
-        {
-            GameObject prefab = Instantiate(config.GetParticlesPrefab(), transform.position, Quaternion.identity);
-            myParticleSystem = prefab.GetComponent<ParticleSystem>();
-            myParticleSystem.Play();
-            Destroy(prefab, myParticleSystem.main.duration);
-        }
+        }      
 
         private void DealRadialDamage(AbilityUseParams useParams)
         {
-            float radius = config.GetRadius();
+            float radius = (config as AreaEffectConfig).GetRadius();
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position, //how is this the origin???
                 radius,
@@ -49,7 +30,7 @@ namespace Dragon.Character
                 bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
                 if (damageable != null && !hitPlayer)
                 {
-                    float damageToDeal = useParams.baseDamage + config.GetDamage();
+                    float damageToDeal = useParams.baseDamage + (config as AreaEffectConfig).GetDamage();
                     damageable.TakeDamage(damageToDeal);
                 }
 

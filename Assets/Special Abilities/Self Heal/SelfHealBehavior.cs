@@ -8,13 +8,11 @@ namespace Dragon.Character
 {
     public class SelfHealBehavior : AbilityBehavior
     {
-        SelfHealConfig config;
         Player player;
 
-        public void SetConfig(SelfHealConfig configToSet)
+        private void Start()
         {
             player = FindObjectOfType<Player>();
-            config = configToSet;
         }
 
         public override void Use(AbilityUseParams useParams)
@@ -22,7 +20,8 @@ namespace Dragon.Character
             var playerAudioSource = player.GetComponent<AudioSource>();
             playerAudioSource.clip = config.GetAudioClip();
             playerAudioSource.Play();
-            player.Heal(config.GetExtraHealth());
+            PlayParticleEffect();
+            player.Heal((config as SelfHealConfig).GetExtraHealth());
         }
     }
 }
