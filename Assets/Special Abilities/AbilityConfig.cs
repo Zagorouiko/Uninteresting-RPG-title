@@ -25,7 +25,7 @@ namespace Dragon.Character
         [SerializeField] GameObject particlePrefab = null;
         [SerializeField] AudioClip audioClip;
 
-        protected ISpecialAbility behavior;
+        protected AbilityBehavior behavior;
 
         abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
 
@@ -48,12 +48,6 @@ namespace Dragon.Character
         {
             return audioClip;
         }
-
-
-    }
-    public interface ISpecialAbility
-    {
-        void Use(AbilityUseParams useParams);
     }
 }
 

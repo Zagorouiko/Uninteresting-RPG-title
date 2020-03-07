@@ -6,7 +6,7 @@ using System;
 
 namespace Dragon.Character
 {
-    public class SelfHealBehavior : MonoBehaviour, ISpecialAbility
+    public class SelfHealBehavior : AbilityBehavior
     {
         SelfHealConfig config;
         Player player;
@@ -17,7 +17,7 @@ namespace Dragon.Character
             config = configToSet;
         }
 
-        public void Use(AbilityUseParams useParams)
+        public override void Use(AbilityUseParams useParams)
         {
             var playerAudioSource = player.GetComponent<AudioSource>();
             playerAudioSource.clip = config.GetAudioClip();

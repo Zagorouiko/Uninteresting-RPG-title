@@ -8,7 +8,7 @@ namespace Dragon.Character
 {
     public class PlayerAttack : MonoBehaviour
     {       
-        float baseDamage = 25f;     
+        float baseDamage = 25f;
         float lastHitTime = 0f;
 
         [SerializeField] AnimatorOverrideController animatorOverrideController = null;

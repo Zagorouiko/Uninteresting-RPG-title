@@ -6,7 +6,7 @@ using System;
 
 namespace Dragon.Character
 {
-    public class AreaEffectBehavior : MonoBehaviour, ISpecialAbility
+    public class AreaEffectBehavior : AbilityBehavior
     {
         AreaEffectConfig config;
         ParticleSystem myParticleSystem;
@@ -17,18 +17,20 @@ namespace Dragon.Character
             config = configToSet;
         }
 
-        public void Use(AbilityUseParams useParams)
+        public override void Use(AbilityUseParams useParams)
         {
             DealRadialDamage(useParams);
             PlayParticleEffect();
         }
+
+
 
         private void PlayParticleEffect()
         {
             GameObject prefab = Instantiate(config.GetParticlesPrefab(), transform.position, Quaternion.identity);
             myParticleSystem = prefab.GetComponent<ParticleSystem>();
             myParticleSystem.Play();
-            Destroy(prefab, myParticleSystem.main.duration);                 
+            Destroy(prefab, myParticleSystem.main.duration);
         }
 
         private void DealRadialDamage(AbilityUseParams useParams)
