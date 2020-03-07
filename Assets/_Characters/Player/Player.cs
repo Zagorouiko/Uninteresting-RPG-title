@@ -39,6 +39,11 @@ namespace Dragon.Character
             }               
         }
 
+        public void PutWeaponInHand(Weapon weaponConfig)
+        {
+
+        }
+
         private void SetCurrentMaxHealth()
         {
             currentHealthPoints = maxHealthPoints;

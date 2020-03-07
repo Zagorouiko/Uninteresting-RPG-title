@@ -14,7 +14,7 @@ namespace Dragon.Character
             return gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
         }
 
-        public float GetExtraDamage()
+        public float GetExtraDamage() 
         {
             return extraDamage;
         }
