@@ -23,7 +23,7 @@ namespace Dragon.Character
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
         [SerializeField] GameObject particlePrefab = null;
-        [SerializeField] AudioClip audioClip;
+        [SerializeField] AudioClip[] audioClips= null;
 
         protected AbilityBehavior behavior;
 
@@ -44,9 +44,9 @@ namespace Dragon.Character
             return particlePrefab;
         }
 
-        public AudioClip GetAudioClip()
+        public AudioClip GetRandomAbilitySound()
         {
-            return audioClip;
+            return audioClips[Random.Range(0, audioClips.Length)];
         }
     }
 }

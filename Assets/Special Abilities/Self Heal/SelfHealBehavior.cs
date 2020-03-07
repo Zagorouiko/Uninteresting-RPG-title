@@ -17,9 +17,7 @@ namespace Dragon.Character
 
         public override void Use(AbilityUseParams useParams)
         {
-            var playerAudioSource = player.GetComponent<AudioSource>();
-            playerAudioSource.clip = config.GetAudioClip();
-            playerAudioSource.Play();
+            PlayAbilitySound();
             PlayParticleEffect();
             player.Heal((config as SelfHealConfig).GetExtraHealth());
         }

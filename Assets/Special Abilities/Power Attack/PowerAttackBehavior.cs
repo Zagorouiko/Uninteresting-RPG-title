@@ -8,6 +8,7 @@ namespace Dragon.Character
     {
         public override void Use(AbilityUseParams useParams)
         {
+            PlayAbilitySound();
             float damageToDeal = useParams.baseDamage + (config as PowerAttackConfig).GetExtraDamage();
             useParams.target.TakeDamage(damageToDeal);
             PlayParticleEffect();

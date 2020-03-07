@@ -11,6 +11,7 @@ namespace Dragon.Character
         public override void Use(AbilityUseParams useParams)
         {
             DealRadialDamage(useParams);
+            PlayAbilitySound();
             PlayParticleEffect();
         }      
 
