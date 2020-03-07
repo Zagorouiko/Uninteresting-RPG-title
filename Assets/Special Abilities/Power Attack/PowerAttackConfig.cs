@@ -9,11 +9,9 @@ namespace Dragon.Character
     {
         [Header("Power Attack specific")]
         [SerializeField] float extraDamage = 1f;
-        public override void AttachComponentTo(GameObject gameObjectToAttachTo)
+        public override AbilityBehavior GetBehaviorComponent(GameObject gameObjectToAttachTo)
         {
-            var behaviorComponent = gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
-            behaviorComponent.SetConfig(this);
-            behavior = behaviorComponent;
+            return gameObjectToAttachTo.AddComponent<PowerAttackBehavior>();
         }
 
         public float GetExtraDamage()

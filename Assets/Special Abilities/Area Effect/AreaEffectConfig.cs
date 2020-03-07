@@ -11,11 +11,9 @@ namespace Dragon.Character
         [SerializeField] float Radius = 5f;
         [SerializeField] float DamageToEachTarget = 15f;
 
-        public override void AttachComponentTo(GameObject gameObjectToAttachTo)
-        {
-            var behaviorComponent = gameObjectToAttachTo.AddComponent<AreaEffectBehavior>();
-            behaviorComponent.SetConfig(this);
-            behavior = behaviorComponent;
+        public override AbilityBehavior GetBehaviorComponent(GameObject gameObjectToAttachTo)
+        {            
+            return gameObjectToAttachTo.AddComponent<AreaEffectBehavior>();
         }
 
         public float GetRadius()

@@ -27,8 +27,16 @@ namespace Dragon.Character
 
         protected AbilityBehavior behavior;
 
-        abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
+        public void AttachAbilityTo(GameObject gameObjectToAttachTo)
+        {
+            AbilityBehavior behaviorComponent = GetBehaviorComponent(gameObjectToAttachTo);
+            behaviorComponent.SetConfig(this);
+            behavior = behaviorComponent;
+        }
 
+        public abstract AbilityBehavior GetBehaviorComponent(GameObject gameObjectToAttachTo);
+        
+       
         public void Use(AbilityUseParams useParams)
         {
             behavior.Use(useParams);
