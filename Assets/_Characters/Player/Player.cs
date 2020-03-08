@@ -33,7 +33,7 @@ namespace Dragon.Character
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
 
-            SetAttackAnimation();
+            //SetAttackAnimation();
             abilities = GetComponent<SpecialAbilities>();
             PutWeaponInHand(currentWeaponConfig);
         }
@@ -68,7 +68,7 @@ namespace Dragon.Character
 
             if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
             {
-                abilities.AttemptSpecialAbility(0);
+                abilities.AttemptSpecialAbility(0, enemy.gameObject);
             }
         }
 

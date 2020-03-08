@@ -5,19 +5,6 @@ using Dragon.Core;
 
 namespace Dragon.Character
 { 
-    public struct AbilityUseParams
-    {
-        public IDamageable target;
-        public float baseDamage;
-
-        public AbilityUseParams(IDamageable target, float baseDamage)
-        {
-            this.target = target;
-            this.baseDamage = baseDamage;
-        }
-    }
-
-
     public abstract class AbilityConfig : ScriptableObject
     {
         [Header("Special Ability General")]
@@ -37,9 +24,9 @@ namespace Dragon.Character
         public abstract AbilityBehavior GetBehaviorComponent(GameObject gameObjectToAttachTo);
         
        
-        public void Use(AbilityUseParams useParams)
+        public void Use(GameObject target)
         {
-            behavior.Use(useParams);
+            behavior.Use(target);
         }
 
         public float GetEnergyCost()

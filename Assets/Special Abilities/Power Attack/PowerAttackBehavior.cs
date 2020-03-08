@@ -6,11 +6,13 @@ namespace Dragon.Character
 {
     public class PowerAttackBehavior : AbilityBehavior
     {
-        public override void Use(AbilityUseParams useParams)
+        public override void Use(GameObject target)
         {
             PlayAbilitySound();
-            float damageToDeal = useParams.baseDamage + (config as PowerAttackConfig).GetExtraDamage();
-            useParams.target.TakeDamage(damageToDeal);
+            float damageToDeal = (config as PowerAttackConfig).GetExtraDamage();
+
+            var targetHealth = target.GetComponent<HealthSystem>();
+            targetHealth.TakeDamage(damageToDeal);
             PlayParticleEffect();
         }        
     }

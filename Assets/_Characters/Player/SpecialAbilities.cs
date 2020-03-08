@@ -13,12 +13,15 @@ namespace Dragon.Character
         [SerializeField] Image energyOrb;
         [SerializeField] float maxEnergyPoints = 100f;
         [SerializeField] float regenPointsPerSecond = 5f;
+        [SerializeField] AudioClip outOfEnergy;
 
+        AudioSource audioSource;
         public float currentEnergyPoints;
         float energyAsPercentage { get { return currentEnergyPoints / maxEnergyPoints; } }                    
 
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             SetCurrentMaxEnergy();
             AttachInitialAbilities();
             UpdateEnergyBar();        
@@ -46,17 +49,16 @@ namespace Dragon.Character
             return abilities.Length;
         }
 
-        public void AttemptSpecialAbility(int abilityIndex)
+        public void AttemptSpecialAbility(int abilityIndex, GameObject target = null)
         {
             var energyCost = abilities[abilityIndex].GetEnergyCost();
             if (energyCost <= currentEnergyPoints)
             {
                 UseEnergyPoints(energyCost);
-                //var abilityParams = new AbilityUseParams(enemy, baseDamage);
-                //abilities[abilityIndex].Use(abilityParams);
+                abilities[abilityIndex].Use(target);
             } else
-            {
-                // out of energy sound
+            {         
+                audioSource.PlayOneShot(outOfEnergy);
             }
         }
 

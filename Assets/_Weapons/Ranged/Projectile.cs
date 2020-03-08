@@ -29,18 +29,18 @@ namespace Dragon.Weapons {
         {
             if (other.gameObject.layer != shooter.layer)
             {
-                DamageIfDamagables(other);
+                //DamageIfDamagables(other);
             }
         }
 
-        private void DamageIfDamagables(Collision other)
-        {
-            Component damageableComponent = other.gameObject.GetComponent(typeof(IDamageable));
-            if (damageableComponent)
-            {
-                (damageableComponent as IDamageable).TakeDamage(damageCaused);
-            }
-        }
+        //private void DamageIfDamagables(Collision other)
+        //{
+        //    Component damageableComponent = other.gameObject.GetComponent(typeof(IDamageable));
+        //    if (damageableComponent)
+        //    {
+        //        (damageableComponent as IDamageable).TakeDamage(damageCaused);
+        //    }
+        //}
 
         private void OnCollisionExit(Collision other)
         {

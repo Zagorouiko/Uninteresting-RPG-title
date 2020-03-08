@@ -4,7 +4,7 @@ using Dragon.Weapons;
 
 namespace Dragon.Character
 {
-    public class Enemy : MonoBehaviour, IDamageable
+    public class Enemy : MonoBehaviour
     {
 
         bool isAttacking = false;
