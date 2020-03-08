@@ -32,7 +32,11 @@ namespace Dragon.Character
 
         private void Update()
         {
-            ScanForAbilityDown();
+            var healthPercentage = GetComponent<HealthSystem>().healthAsPercentage;
+            if (healthPercentage > Mathf.Epsilon)
+            {
+                ScanForAbilityDown();
+            }         
         }
 
         private void AttachInitialAbilities()
@@ -59,7 +63,7 @@ namespace Dragon.Character
             enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
             {
-                DoDamage(enemy);
+                AttackTarget(enemy);
             }
 
             if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
@@ -93,7 +97,7 @@ namespace Dragon.Character
             return distanceToEnemy <= weaponInUse.GetAttackRange();
         }
 
-        private void DoDamage(Enemy enemy)
+        private void AttackTarget(Enemy enemy)
         {
             SetAttackAnimation();
             if (Time.time - lastHitTime > weaponInUse.GetminTimeBetweenHits())

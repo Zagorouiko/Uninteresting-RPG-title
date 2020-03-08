@@ -1658,6 +1658,7 @@ GameObject:
   - component: {fileID: 1864604346}
   - component: {fileID: 522197181}
   - component: {fileID: 522197194}
+  - component: {fileID: 8427970699413967539}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -1751,6 +1752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoppingDistance: 1
   moveSpeedMultiplier: 2
+  animationSpeedMultiplier: 2
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
@@ -1800,21 +1802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4408a86bb81d0145b06929e1b5be000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealthPoints: 100
   currentWeaponConfig: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3,
     type: 2}
   weaponSocket: {fileID: 6682303348925532157}
-  damageSounds:
-  - {fileID: 8300000, guid: a5d82669753553a4abc87dbd1cb8fd9e, type: 3}
-  - {fileID: 8300000, guid: 43a6aaa8de250c746965532c81ed1b43, type: 3}
-  - {fileID: 8300000, guid: cf2f4ed544a2482438e54e4b8d87d3a7, type: 3}
-  - {fileID: 8300000, guid: b3cb4958b4b5f2842b569a8413e40727, type: 3}
-  - {fileID: 8300000, guid: f0c175d5c92561a4dae27a7f3b883a2c, type: 3}
-  - {fileID: 8300000, guid: a5fe283d3b01a6841baeb6717a6f0706, type: 3}
-  deathSounds:
-  - {fileID: 8300000, guid: 20d5a61766af91742ba1e013399e23cd, type: 3}
-  - {fileID: 8300000, guid: d07db9252af29344e875ee9b71e8861f, type: 3}
-  - {fileID: 8300000, guid: 6e88a8f0e50fdc34a9cf09215bc94239, type: 3}
 --- !u!195 &2261343017275746146
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1970,6 +1960,23 @@ MonoBehaviour:
   maxEnergyPoints: 100
   regenPointsPerSecond: 5
   currentEnergyPoints: 0
+--- !u!114 &8427970699413967539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682303348925593807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19954ccc1c332304eacb28464d15a780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  damageSounds: []
+  deathSounds: []
+  currentHealthPoints: 100
+  maxHealthPoints: 100
 --- !u!1 &6682303348925594027
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,6 +56,11 @@ namespace Dragon.Character
             }
         }
 
+        public void Kill()
+        {
+
+        }
+
         public void Move(Vector3 movement)
         {
             SetForwardAndTurn(movement);

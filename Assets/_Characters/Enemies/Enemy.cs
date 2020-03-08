@@ -6,8 +6,6 @@ namespace Dragon.Character
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-        float currentHealthPoints = 100f;
-        float maxHealthPoints = 100f;
 
         bool isAttacking = false;
         float damagePerShot = 5f;
@@ -34,12 +32,6 @@ namespace Dragon.Character
 
         private void Update()
         {
-            if (player.healthAsPercentage <= Mathf.Epsilon)
-            {
-                StopAllCoroutines();
-                //aiCharacterControl.enabled = false;
-                Destroy(this);
-            }
             MoveTowardPlayer();
         }
 
@@ -87,17 +79,6 @@ namespace Dragon.Character
             projectileComponent.SetdamagedCaused(damagePerShot);
         }
 
-        public void TakeDamage(float damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            if (currentHealthPoints <= 0) { Destroy(gameObject); }
-        }
-
-        public float healthAsPercentage
-        {
-            get { return currentHealthPoints / maxHealthPoints; }
-        }
-
         void OnDrawGizmos()
         {
             Gizmos.color = new Color(255f, 0f, 0, .5f);
@@ -105,6 +86,11 @@ namespace Dragon.Character
 
             Gizmos.color = new Color(0f, 0f, 255f, 1f);
             Gizmos.DrawWireSphere(transform.position, moveRadius);
+        }
+
+        public void TakeDamage(float damage)
+        {
+
         }
     }
 }

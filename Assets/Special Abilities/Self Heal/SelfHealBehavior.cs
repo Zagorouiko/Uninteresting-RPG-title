@@ -12,14 +12,16 @@ namespace Dragon.Character
 
         private void Start()
         {
-            player = FindObjectOfType<Player>();
+            player = GetComponent<Player>();
         }
 
         public override void Use(AbilityUseParams useParams)
         {
             PlayAbilitySound();
+
+            var playerHealth = player.GetComponent<HealthSystem>();          
+            playerHealth.Heal((config as SelfHealConfig).GetExtraHealth());
             PlayParticleEffect();
-            player.Heal((config as SelfHealConfig).GetExtraHealth());
         }
     }
 }
