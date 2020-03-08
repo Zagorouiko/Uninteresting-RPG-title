@@ -19,13 +19,11 @@ namespace Dragon.Character
 
         Enemy enemy = null;
         Animator animator;
-        //AICharacterControl aiCharacterControl;
         CameraRaycaster cameraRaycaster;
 
         void Start()
         {         
             AttachInitialAbilities();
-            //aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
 
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
@@ -61,7 +59,6 @@ namespace Dragon.Character
             enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
             {
-                //aiCharacterControl.SetTarget(enemy.transform);
                 DoDamage(enemy);
             }
 

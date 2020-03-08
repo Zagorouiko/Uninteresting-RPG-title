@@ -10,7 +10,11 @@ namespace Dragon.Character
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] float stoppingDistance = 1f;
+        [SerializeField] float moveSpeedMultiplier = 2f;
 
+
+        Animator animator;
+        Rigidbody rigidBody;
         ThirdPersonCharacter character;
         Vector3 clickPoint;
         GameObject walkTarget;
@@ -21,6 +25,8 @@ namespace Dragon.Character
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
             character = GetComponent<ThirdPersonCharacter>();
             walkTarget = new GameObject("walkTarget");
+            animator = GetComponent<Animator>();
+            rigidBody = GetComponent<Rigidbody>();
 
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
@@ -57,6 +63,17 @@ namespace Dragon.Character
             {
                 agent.SetDestination(enemy.transform.position);
             }
+        }
+
+        void OnAnimatorMove()
+        {
+            if (Time.deltaTime > 0)
+            {
+                Vector3 velocity = (animator.deltaPosition * moveSpeedMultiplier / Time.deltaTime);
+
+                velocity.y = rigidBody.velocity.y;
+                rigidBody.velocity = velocity;
+            }    
         }
     }
 }
