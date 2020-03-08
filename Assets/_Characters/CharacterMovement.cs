@@ -6,27 +6,34 @@ using Dragon.CameraUI;
 namespace Dragon.Character
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(ThirdPersonCharacter))]
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(Animator))]
     public class CharacterMovement : MonoBehaviour
     {
         [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float moveSpeedMultiplier = 2f;
+        [SerializeField] float animationSpeedMultiplier = 2f;
+        [SerializeField] float movingTurnSpeed = 360;
+        [SerializeField] float stationaryTurnSpeed = 180;
+        [SerializeField] float moveThreshold = 1f;
 
+        float turnAmount;
+        float forwardAmount;
+        Vector3 groundNormal;
 
         Animator animator;
         Rigidbody rigidBody;
-        ThirdPersonCharacter character;
-        Vector3 clickPoint;
-        GameObject walkTarget;
         NavMeshAgent agent;
 
         void Start()
         {
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            character = GetComponent<ThirdPersonCharacter>();
-            walkTarget = new GameObject("walkTarget");
             animator = GetComponent<Animator>();
             rigidBody = GetComponent<Rigidbody>();
+
+            rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
+            animator.applyRootMotion = true;
 
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;
@@ -41,12 +48,44 @@ namespace Dragon.Character
         {
             if (agent.remainingDistance > agent.stoppingDistance)
             {
-                character.Move(agent.desiredVelocity);
+                Move(agent.desiredVelocity);
             }
             else
             {
-                character.Move(Vector3.zero);
+                Move(Vector3.zero);
             }
+        }
+
+        public void Move(Vector3 movement)
+        {
+            SetForwardAndTurn(movement);
+            ApplyExtraTurnRotation();
+            UpdateAnimator();
+        }
+
+        private void SetForwardAndTurn(Vector3 movement)
+        {
+            if (movement.magnitude > moveThreshold)
+            {
+                movement.Normalize();
+            }
+
+            var localMove = transform.InverseTransformDirection(movement);
+            turnAmount = Mathf.Atan2(localMove.x, localMove.z);
+            forwardAmount = localMove.z;
+        }
+
+        void UpdateAnimator()
+        {
+            animator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
+            animator.SetFloat("Turn", turnAmount, 0.1f, Time.deltaTime);
+            animator.speed = animationSpeedMultiplier;
+        }
+
+        void ApplyExtraTurnRotation()
+        {
+            float turnSpeed = Mathf.Lerp(stationaryTurnSpeed, movingTurnSpeed, forwardAmount);
+            transform.Rotate(0, turnAmount * turnSpeed * Time.deltaTime, 0);
         }
 
         void OnMouseOverPotentiallyWalkable(Vector3 destination)

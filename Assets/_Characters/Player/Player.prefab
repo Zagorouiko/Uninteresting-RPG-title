@@ -1650,7 +1650,6 @@ GameObject:
   - component: {fileID: 6682303348932909961}
   - component: {fileID: 6682303348928707743}
   - component: {fileID: 6682303348937421007}
-  - component: {fileID: 6682303348935340941}
   - component: {fileID: 6682303348420110918}
   - component: {fileID: 1173125603628769065}
   - component: {fileID: 3993903821547974300}
@@ -1738,26 +1737,6 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &6682303348935340941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682303348925593807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 3600
-  m_StationaryTurnSpeed: 1800
-  m_JumpPower: 6
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.73
-  m_AnimSpeedMultiplier: 1.5
-  m_GroundCheckDistance: 0.3
 --- !u!114 &6682303348420110918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,6 +1750,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoppingDistance: 1
+  moveSpeedMultiplier: 2
+  movingTurnSpeed: 360
+  stationaryTurnSpeed: 180
+  moveThreshold: 1
 --- !u!222 &1173125603628769065
 CanvasRenderer:
   m_ObjectHideFlags: 0
