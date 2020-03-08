@@ -19,7 +19,7 @@ namespace Dragon.Character
         [SerializeField] float attackRadius = 5f;
         
         Player player;
-        AICharacterControl aiCharacterControl;
+        //AICharacterControl aiCharacterControl;
         [SerializeField] GameObject projectile;
         [SerializeField] GameObject projectileSpawn;
 
@@ -29,7 +29,7 @@ namespace Dragon.Character
         private void Start()
         {
             player = FindObjectOfType<Player>();           
-            aiCharacterControl = GetComponent<AICharacterControl>();
+            //aiCharacterControl = GetComponent<AICharacterControl>();
         }
 
         private void Update()
@@ -37,7 +37,7 @@ namespace Dragon.Character
             if (player.healthAsPercentage <= Mathf.Epsilon)
             {
                 StopAllCoroutines();
-                aiCharacterControl.enabled = false;
+                //aiCharacterControl.enabled = false;
                 Destroy(this);
             }
             MoveTowardPlayer();
@@ -61,11 +61,11 @@ namespace Dragon.Character
 
             if (distanceToPlayer <= moveRadius)
             {
-                aiCharacterControl.SetTarget(player.transform);
+                //aiCharacterControl.SetTarget(player.transform);
             }
             else
             {
-                aiCharacterControl.SetTarget(transform);
+                //aiCharacterControl.SetTarget(transform);
             }
         }
 

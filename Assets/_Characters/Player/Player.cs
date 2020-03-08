@@ -15,11 +15,12 @@ namespace Dragon.Character
         float regenPointsPerSecond = 5f;
         bool isPlayerDead;
 
-        [SerializeField] Weapon weaponInUse;     
+        [SerializeField] Weapon currentWeaponConfig;     
         [SerializeField] GameObject weaponSocket;
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
 
+        GameObject weaponObject;
         const string DEATH_TRIGGER = "New Trigger 0";
         AudioSource audioSource;
         Animator animator;
@@ -29,7 +30,7 @@ namespace Dragon.Character
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
             SetCurrentMaxHealth();
-            PutWeaponInHand();            
+            PutWeaponInHand(currentWeaponConfig);
         }
         private void Update()
         {
@@ -39,22 +40,19 @@ namespace Dragon.Character
             }               
         }
 
-        public void PutWeaponInHand(Weapon weaponConfig)
+        public void PutWeaponInHand(Weapon weaponToUse)
         {
-
+            currentWeaponConfig = weaponToUse;
+            var weaponPrefab = weaponToUse.GetWeaponPrefab();
+            Destroy(weaponObject);
+            weaponObject = Instantiate(weaponPrefab, weaponSocket.transform);
+            weaponObject.transform.localPosition = currentWeaponConfig.gripTransform.localPosition;
+            weaponObject.transform.localRotation = currentWeaponConfig.gripTransform.localRotation;
         }
 
         private void SetCurrentMaxHealth()
         {
             currentHealthPoints = maxHealthPoints;
-        }
-
-        private void PutWeaponInHand()
-        {
-            var weaponPrefab = weaponInUse.GetWeaponPrefab();
-            var weapon = Instantiate(weaponPrefab, weaponSocket.transform);
-            weapon.transform.localPosition = weaponInUse.gripTransform.localPosition;
-            weapon.transform.localRotation = weaponInUse.gripTransform.localRotation;
         }
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }

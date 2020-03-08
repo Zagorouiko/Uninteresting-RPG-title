@@ -1656,7 +1656,6 @@ GameObject:
   - component: {fileID: 3993903821547974300}
   - component: {fileID: 3843263771253683947}
   - component: {fileID: 2261343017275746146}
-  - component: {fileID: -358282107159401711}
   - component: {fileID: 1864604346}
   - component: {fileID: 522197181}
   - component: {fileID: 522197194}
@@ -1771,6 +1770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df051cd7e11b944db33928b8fceede3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoppingDistance: 1
 --- !u!222 &1173125603628769065
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1818,7 +1818,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealthPoints: 100
-  weaponInUse: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3, type: 2}
+  currentWeaponConfig: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3,
+    type: 2}
   weaponSocket: {fileID: 6682303348925532157}
   damageSounds:
   - {fileID: 8300000, guid: a5d82669753553a4abc87dbd1cb8fd9e, type: 3}
@@ -1853,19 +1854,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-358282107159401711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682303348925593807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &1864604346
 MonoBehaviour:
   m_ObjectHideFlags: 0

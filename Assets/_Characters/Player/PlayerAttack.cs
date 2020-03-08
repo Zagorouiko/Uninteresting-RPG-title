@@ -19,17 +19,17 @@ namespace Dragon.Character
 
         Enemy enemy = null;
         Animator animator;
-        AICharacterControl aiCharacterControl;
+        //AICharacterControl aiCharacterControl;
         CameraRaycaster cameraRaycaster;
 
         void Start()
         {         
             AttachInitialAbilities();
-            aiCharacterControl = GetComponent<AICharacterControl>();
+            //aiCharacterControl = GetComponent<AICharacterControl>();
             cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
 
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
-            SetupRuntimeAnimator();
+            SetAttackAnimation();
         }
 
         private void Update()
@@ -61,7 +61,7 @@ namespace Dragon.Character
             enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
             {
-                aiCharacterControl.SetTarget(enemy.transform);
+                //aiCharacterControl.SetTarget(enemy.transform);
                 DoDamage(enemy);
             }
 
@@ -83,7 +83,7 @@ namespace Dragon.Character
             }
         }
 
-        private void SetupRuntimeAnimator()
+        private void SetAttackAnimation()
         {
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = animatorOverrideController;
@@ -98,6 +98,7 @@ namespace Dragon.Character
 
         private void DoDamage(Enemy enemy)
         {
+            SetAttackAnimation();
             if (Time.time - lastHitTime > weaponInUse.GetminTimeBetweenHits())
             {
                 animator.SetTrigger("New Trigger");
