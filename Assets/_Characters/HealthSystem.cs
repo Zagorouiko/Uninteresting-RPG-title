@@ -19,14 +19,14 @@ namespace Dragon.Character
 
         AudioSource audioSource;
         Animator animator;
-        CharacterMovement characterMovement;
+        Character characterMovement;
         const string DEATH_TRIGGER = "New Trigger 0";
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
         void Start()
         {
-            characterMovement = GetComponent<CharacterMovement>();
+            characterMovement = GetComponent<Character>();
             audioSource = GetComponent<AudioSource>();
             animator = GetComponent<Animator>();
             SetCurrentMaxHealth();

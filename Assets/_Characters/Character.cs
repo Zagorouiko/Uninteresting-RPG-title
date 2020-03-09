@@ -9,8 +9,20 @@ namespace Dragon.Character
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(Animator))]
-    public class CharacterMovement : MonoBehaviour
+    public class Character : MonoBehaviour
     {
+        [Header("Capsule Collider Settings")]
+        [SerializeField] Vector3 capsuleColliderCenter = new Vector3(0, 1.03f, 0);
+        [SerializeField] float capsuleColliderRadius = 02f;
+        [SerializeField] float capsuleColliderHeight = 2.03f;
+
+        [Header("Setup Settings")]
+        [SerializeField] RuntimeAnimatorController animatorController;
+        [SerializeField] AnimatorOverrideController animatorOverrideController;
+        [SerializeField] Avatar characterAvatar;
+        
+
+        [Header("Movement Properties")]
         [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float moveSpeedMultiplier = 2f;
         [SerializeField] float animationSpeedMultiplier = 2f;
@@ -18,18 +30,37 @@ namespace Dragon.Character
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] float moveThreshold = 1f;
 
+
         float turnAmount;
         float forwardAmount;
         Vector3 groundNormal;
 
+        CapsuleCollider capsuleCollider;
         Animator animator;
         Rigidbody rigidBody;
         NavMeshAgent agent;
 
+
+        void Awake()
+        {
+            AddRequiredComponents();
+        }
+
+        private void AddRequiredComponents()
+        {
+            animator = gameObject.AddComponent<Animator>();
+            capsuleCollider = gameObject.AddComponent<CapsuleCollider>();
+            animator.avatar = characterAvatar;
+            
+            capsuleCollider.center = capsuleColliderCenter;
+            capsuleCollider.radius = capsuleColliderRadius;
+            capsuleCollider.height = capsuleColliderHeight;
+        }
+
         void Start()
         {
             CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            animator = GetComponent<Animator>();
+            
             rigidBody = GetComponent<Rigidbody>();
 
             rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
