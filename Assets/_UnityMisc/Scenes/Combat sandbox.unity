@@ -999,6 +999,12 @@ MonoBehaviour:
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
   moveThreshold: 1
+  turnAmount: 0
+  forwardAmount: 0
+  groundNormal: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
+  rigidBody: {fileID: 0}
+  agent: {fileID: 0}
 --- !u!4 &666066903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4856087298316178, guid: 833a3cbec60a98b4991b7bfaa00b878f,
@@ -2428,12 +2434,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6682303348937421007, guid: f4c7e272965ceef41af483232da979db,
-        type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: c2815a7ab32e42c4bb42f59caacb8ec1,
-        type: 2}
     - target: {fileID: 8427970699413967539, guid: f4c7e272965ceef41af483232da979db,
         type: 3}
       propertyPath: healthBar
