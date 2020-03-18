@@ -37,7 +37,7 @@ namespace Dragon.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            var player = FindObjectOfType<Player>();
+            var player = FindObjectOfType<PlayerMovement>();
             player.GetComponent<AudioSource>().PlayOneShot(pickUpSFX);
             player.PutWeaponInHand(weaponConfig);
         }

@@ -993,18 +993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df051cd7e11b944db33928b8fceede3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoppingDistance: 1
-  moveSpeedMultiplier: 2
-  animationSpeedMultiplier: 2
-  movingTurnSpeed: 360
-  stationaryTurnSpeed: 180
-  moveThreshold: 1
-  turnAmount: 0
-  forwardAmount: 0
-  groundNormal: {x: 0, y: 0, z: 0}
-  animator: {fileID: 0}
-  rigidBody: {fileID: 0}
-  agent: {fileID: 0}
 --- !u!4 &666066903 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4856087298316178, guid: 833a3cbec60a98b4991b7bfaa00b878f,

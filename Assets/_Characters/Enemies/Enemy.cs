@@ -16,7 +16,7 @@ namespace Dragon.Character
         [SerializeField] float moveRadius = 7f;
         [SerializeField] float attackRadius = 5f;
         
-        Player player;
+        PlayerMovement player;
         //AICharacterControl aiCharacterControl;
         [SerializeField] GameObject projectile;
         [SerializeField] GameObject projectileSpawn;
@@ -26,7 +26,7 @@ namespace Dragon.Character
 
         private void Start()
         {
-            player = FindObjectOfType<Player>();           
+            player = FindObjectOfType<PlayerMovement>();           
             //aiCharacterControl = GetComponent<AICharacterControl>();
         }
 

@@ -40,6 +40,7 @@ namespace Dragon.Character
         Animator animator;
         Rigidbody rigidBody;
         NavMeshAgent navMeshAgent;
+        bool isAlive = true;
 
 
         void Awake()
@@ -72,18 +73,9 @@ namespace Dragon.Character
             navMeshAgent.stoppingDistance = NavMeshAgentStoppingDistance;
         }
 
-        void Start()
-        {
-            CameraRaycaster cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            animator.applyRootMotion = true;
-
-            cameraRaycaster.onMouseOverWalkable += OnMouseOverPotentiallyWalkable;
-            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
-        }
-
         void Update()
         {
-            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance)
+            if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)
             {
                 Move(navMeshAgent.desiredVelocity);
             }
@@ -95,10 +87,15 @@ namespace Dragon.Character
 
         public void Kill()
         {
-
+            isAlive = false;
         }
 
-        public void Move(Vector3 movement)
+        public void SetDestination(Vector3 worldPos)
+        {
+            navMeshAgent.destination = worldPos;
+        }
+
+        void Move(Vector3 movement)
         {
             SetForwardAndTurn(movement);
             ApplyExtraTurnRotation();
@@ -128,22 +125,6 @@ namespace Dragon.Character
         {
             float turnSpeed = Mathf.Lerp(stationaryTurnSpeed, movingTurnSpeed, forwardAmount);
             transform.Rotate(0, turnAmount * turnSpeed * Time.deltaTime, 0);
-        }
-
-        void OnMouseOverPotentiallyWalkable(Vector3 destination)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                navMeshAgent.SetDestination(destination);
-            }
-        }
-
-        void OnMouseOverEnemy(Enemy enemy)
-        {
-            if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(1))
-            {
-                navMeshAgent.SetDestination(enemy.transform.position);
-            }
         }
 
         void OnAnimatorMove()

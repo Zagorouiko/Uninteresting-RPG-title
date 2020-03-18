@@ -8,11 +8,11 @@ namespace Dragon.Character
 {
     public class SelfHealBehavior : AbilityBehavior
     {
-        Player player;
+        PlayerMovement player;
 
         private void Start()
         {
-            player = GetComponent<Player>();
+            player = GetComponent<PlayerMovement>();
         }
 
         public override void Use(GameObject target)

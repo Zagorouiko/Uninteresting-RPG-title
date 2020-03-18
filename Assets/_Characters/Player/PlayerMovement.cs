@@ -8,7 +8,7 @@ using Dragon.CameraUI;
 
 namespace Dragon.Character
 {
-    public class Player : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         float baseDamage = 25f;
         float lastHitTime = 0f;
@@ -27,34 +27,30 @@ namespace Dragon.Character
         CameraRaycaster cameraRaycaster;
         Enemy enemy = null;
         Animator animator;
+        Character character;
 
         private void Start()
         {
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
-            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
+            character = GetComponent<Character>();
+            RegisterForMouseEvents();
 
             //SetAttackAnimation();
             abilities = GetComponent<SpecialAbilities>();
             PutWeaponInHand(currentWeaponConfig);
         }
 
-        private void Update()
+        private void RegisterForMouseEvents()
         {
-            var healthPercentage = GetComponent<HealthSystem>().healthAsPercentage;
-            if (healthPercentage > Mathf.Epsilon)
-            {
-                ScanForAbilityDown();
-            }
+            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
+            cameraRaycaster.onMouseOverWalkable += OnMouseOverWalkable;
         }
 
-        private void ScanForAbilityDown()
+        private void OnMouseOverWalkable(Vector3 destination)
         {
-            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
+            if (Input.GetMouseButton(0))
             {
-                if (Input.GetKeyDown(keyIndex.ToString()))
-                {
-                    abilities.AttemptSpecialAbility(keyIndex);
-                }
+                character.SetDestination(destination);
             }
         }
 
@@ -69,6 +65,22 @@ namespace Dragon.Character
             if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
             {
                 abilities.AttemptSpecialAbility(0, enemy.gameObject);
+            }
+        }
+
+        private void Update()
+        {
+             ScanForAbilityDown();
+        }
+
+        private void ScanForAbilityDown()
+        {
+            for (int keyIndex = 1; keyIndex < abilities.GetNumberOfAbilities(); keyIndex++)
+            {
+                if (Input.GetKeyDown(keyIndex.ToString()))
+                {
+                    abilities.AttemptSpecialAbility(keyIndex);
+                }
             }
         }
 

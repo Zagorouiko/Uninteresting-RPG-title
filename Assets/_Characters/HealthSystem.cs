@@ -73,7 +73,7 @@ namespace Dragon.Character
             characterMovement.Kill();           
             animator.SetTrigger(DEATH_TRIGGER);
 
-            var playerComponent = GetComponent<Player>();
+            var playerComponent = GetComponent<PlayerMovement>();
             if (playerComponent && playerComponent.isActiveAndEnabled)
             {
                 PlayDeathSound();
