@@ -2417,6 +2417,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6038069576979120069, guid: f4c7e272965ceef41af483232da979db,
+        type: 3}
+      propertyPath: weaponSocket
+      value: 
+      objectReference: {fileID: 1768090926}
     - target: {fileID: 6682303348925593807, guid: f4c7e272965ceef41af483232da979db,
         type: 3}
       propertyPath: m_Name
@@ -2520,6 +2525,12 @@ PrefabInstance:
     - {fileID: 5154271442803364969, guid: 8519fa41596d2294881e2cdb84f36177, type: 3}
     - {fileID: 5751983582618188394, guid: 8519fa41596d2294881e2cdb84f36177, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8519fa41596d2294881e2cdb84f36177, type: 3}
+--- !u!1 &1768090926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1638397874, guid: 8519fa41596d2294881e2cdb84f36177,
+    type: 3}
+  m_PrefabInstance: {fileID: 1768090925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1786319072
 PrefabInstance:
   m_ObjectHideFlags: 0

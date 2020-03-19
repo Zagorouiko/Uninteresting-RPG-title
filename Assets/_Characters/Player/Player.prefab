@@ -11211,10 +11211,10 @@ GameObject:
   - component: {fileID: 5670884867636858875}
   - component: {fileID: 1173125603628769065}
   - component: {fileID: 3993903821547974300}
-  - component: {fileID: 3843263771253683947}
   - component: {fileID: 8427970699413967539}
   - component: {fileID: 9189094096977881137}
   - component: {fileID: 1420876649}
+  - component: {fileID: 6038069576979120069}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -11279,26 +11279,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &3843263771253683947
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682303348925593807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4408a86bb81d0145b06929e1b5be000, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponInUse: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3, type: 2}
-  currentWeaponConfig: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3,
-    type: 2}
-  weaponSocket: {fileID: 6682303348925532157}
-  animatorOverrideController: {fileID: 22100000, guid: 7bd16707424089c4a9010638c4d3b895,
-    type: 2}
-  criticalHitChance: 0.1
-  criticalHitMultiplier: 1.25
 --- !u!114 &8427970699413967539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11364,6 +11344,26 @@ MonoBehaviour:
   moveThreshold: 1
   navMeshAgentSteeringSpeed: 1
   NavMeshAgentStoppingDistance: 1.3
+--- !u!114 &6038069576979120069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682303348925593807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0504686bf0c8cd94fbbe4b435f21dd01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponInUse: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3, type: 2}
+  currentWeaponConfig: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3,
+    type: 2}
+  weaponSocket: {fileID: 0}
+  animatorOverrideController: {fileID: 22100000, guid: 7bd16707424089c4a9010638c4d3b895,
+    type: 2}
+  criticalHitChance: 0.1
+  criticalHitMultiplier: 1.25
 --- !u!1 &6682303348925594027
 GameObject:
   m_ObjectHideFlags: 0

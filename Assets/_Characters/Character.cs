@@ -85,6 +85,11 @@ namespace Dragon.Character
             }
         }
 
+        public AnimatorOverrideController GetAnimatorController()
+        {
+            return animatorOverrideController;
+        }
+
         public void Kill()
         {
             isAlive = false;

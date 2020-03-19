@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dragon.Weapons
 {
     [CreateAssetMenu(menuName = ("RPG/Weapon"))]
-    public class Weapon : ScriptableObject
+    public class WeaponConfig : ScriptableObject
     {
         public Transform gripTransform;
         [SerializeField] float minTimeBetweenHits;

@@ -9,7 +9,7 @@ namespace Dragon.Weapons
     [ExecuteInEditMode]
     public class WeaponPickupPoint : MonoBehaviour
     {
-        [SerializeField] Weapon weaponConfig;
+        [SerializeField] WeaponConfig weaponConfig;
         [SerializeField] AudioClip pickUpSFX;
 
         private void Update()
@@ -37,7 +37,7 @@ namespace Dragon.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            var player = FindObjectOfType<PlayerMovement>();
+            var player = FindObjectOfType<WeaponSystem>();
             player.GetComponent<AudioSource>().PlayOneShot(pickUpSFX);
             player.PutWeaponInHand(weaponConfig);
         }
