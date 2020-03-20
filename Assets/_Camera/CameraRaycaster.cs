@@ -11,7 +11,7 @@ namespace Dragon.CameraUI {
 		public delegate void OnMouseOverTerrain(Vector3 destination);
 		public event OnMouseOverTerrain onMouseOverWalkable;
 
-		public delegate void OnMouseOverEnemy(Enemy enemy);
+		public delegate void OnMouseOverEnemy(EnemyAI enemy);
 		public event OnMouseOverEnemy onMouseOverEnemy;
 
 		[SerializeField] Texture2D enemyCursor = null;
@@ -49,7 +49,7 @@ namespace Dragon.CameraUI {
 			Physics.Raycast(ray, out hitInfo, maxRaycastDepth);
 
 			var gameObjectHit = hitInfo.collider.gameObject;
-			var enemyHit = gameObjectHit.GetComponent<Enemy>();
+			var enemyHit = gameObjectHit.GetComponent<EnemyAI>();
 			if (enemyHit)
 			{
 				Cursor.SetCursor(enemyCursor, cursorHotspot, CursorMode.Auto);

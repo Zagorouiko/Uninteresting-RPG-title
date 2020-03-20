@@ -12,7 +12,7 @@ namespace Dragon.Character
     {
         SpecialAbilities abilities;
         CameraRaycaster cameraRaycaster;
-        Enemy enemy = null;
+        EnemyAI enemy = null;
         Character character;
         WeaponSystem weaponSystem;
 
@@ -40,7 +40,7 @@ namespace Dragon.Character
             }
         }
 
-        private void OnMouseOverEnemy(Enemy enemyToSet)
+        private void OnMouseOverEnemy(EnemyAI enemyToSet)
         {
             enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
@@ -70,7 +70,7 @@ namespace Dragon.Character
             }
         }
 
-        private bool IsTargetInRange(Enemy enemy)
+        private bool IsTargetInRange(EnemyAI enemy)
         {
             float distanceToEnemy = (enemy.transform.position - transform.position).magnitude;
             return distanceToEnemy <= weaponSystem.GetCurrentWeaponConfig().GetAttackRange();

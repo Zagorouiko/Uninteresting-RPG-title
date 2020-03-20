@@ -43,7 +43,7 @@ namespace Dragon.Character
             animatorOverrideController["Default Attack"] = weaponInUse.GetAttackAnimation();
         }
 
-        private void AttackTarget(Enemy enemy)
+        private void AttackTarget(EnemyAI enemy)
         {
             SetAttackAnimation();
             if (Time.time - lastHitTime > weaponInUse.GetminTimeBetweenHits())
