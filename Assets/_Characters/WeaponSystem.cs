@@ -11,7 +11,6 @@ namespace Dragon.Character
 
         [SerializeField] float baseDamage = 25f;
         [SerializeField] WeaponConfig currentWeaponConfig;
-        [SerializeField] WeaponConfig weaponInUse;
         [SerializeField] GameObject weaponSocket;
 
         [Range(.1f, 1f)]
@@ -40,13 +39,13 @@ namespace Dragon.Character
             var animatorOverrideController = character.GetAnimatorController();
             animator = GetComponent<Animator>();
             animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController["Default Attack"] = weaponInUse.GetAttackAnimation();
+            animatorOverrideController["Default Attack"] = currentWeaponConfig.GetAttackAnimation();
         }
 
         private void AttackTarget(EnemyAI enemy)
         {
             SetAttackAnimation();
-            if (Time.time - lastHitTime > weaponInUse.GetminTimeBetweenHits())
+            if (Time.time - lastHitTime > currentWeaponConfig.GetminTimeBetweenHits())
             {
                 animator.SetTrigger("New Trigger");
                 enemy.TakeDamage(CalculateDamage());
@@ -61,15 +60,7 @@ namespace Dragon.Character
 
         private float CalculateDamage()
         {
-            var randomNumber = Random.Range(0, 1);
-            if (randomNumber <= criticalHitChance)
-            {
-                return (baseDamage + weaponInUse.GetAdditionalDamage()) * criticalHitMultiplier;
-            }
-            else
-            {
-                return (baseDamage + weaponInUse.GetAdditionalDamage());
-            }
+            return baseDamage + currentWeaponConfig.GetAdditionalDamage();
         }
 
         public void PutWeaponInHand(WeaponConfig weaponToUse)

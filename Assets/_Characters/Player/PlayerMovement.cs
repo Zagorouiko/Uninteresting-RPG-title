@@ -32,7 +32,7 @@ namespace Dragon.Character
             cameraRaycaster.onMouseOverWalkable += OnMouseOverWalkable;
         }
 
-        private void OnMouseOverWalkable(Vector3 destination)
+        public void OnMouseOverWalkable(Vector3 destination)
         {
             if (Input.GetMouseButton(0))
             {
