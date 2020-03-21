@@ -2,6 +2,7 @@
 using Dragon.Core;
 using Dragon.Weapons;
 using System.Collections;
+using System;
 
 namespace Dragon.Character
 {
@@ -10,6 +11,10 @@ namespace Dragon.Character
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField] float chaseRadius = 6f;
+        [SerializeField] WaypointContainer patrolPath;
+
+        [SerializeField] int nextWaypointIndex;
+        float waypointTolerance = 2f;
 
         bool isAttacking = false;
         float currentWeaponRange;    
@@ -44,7 +49,7 @@ namespace Dragon.Character
             if (distanceToPlayer > chaseRadius && state != State.patrolling)
             {
                 StopAllCoroutines();
-                state = State.patrolling;
+                StartCoroutine(Patrol());
             }
             if (distanceToPlayer <= chaseRadius && state != State.chasing)
             {
@@ -56,6 +61,26 @@ namespace Dragon.Character
                 StopAllCoroutines();
                 state = State.attacking;
             }
+        }
+
+        IEnumerator Patrol()
+        {
+            state = State.patrolling;
+            while (true)
+            {
+                Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
+                character.SetDestination(nextWaypointPos);
+                CycleWaypointWhenClose(nextWaypointPos);
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
+
+        private void CycleWaypointWhenClose(Vector3 nextWaypointPos)
+        {
+            if (Vector3.Distance(transform.position, nextWaypointPos) <= waypointTolerance)
+            {
+                nextWaypointIndex = (nextWaypointIndex + 1) % patrolPath.transform.childCount;
+            }                                             
         }
 
         IEnumerator ChasePlayer()
