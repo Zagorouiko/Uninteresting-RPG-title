@@ -12,6 +12,7 @@ namespace Dragon.Character
         {
             DealRadialDamage(target);
             PlayAbilitySound();
+            PlayAbilityAnimation();
             PlayParticleEffect();
         }      
 

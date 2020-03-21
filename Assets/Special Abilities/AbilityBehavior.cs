@@ -33,6 +33,17 @@ namespace Dragon.Character
             yield return new WaitForEndOfFrame();
         }
 
+        protected void PlayAbilityAnimation()
+        {
+            AnimatorOverrideController animatorOverrideController = GetComponent<Character>().GetAnimatorController();
+            var abilityAnimation = config.GetAbilityAnimation();
+            var animator = GetComponent<Animator>();
+
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController["Default Attack"] = abilityAnimation;
+            animator.SetTrigger("New Trigger");
+        }
+
         protected void PlayAbilitySound()
         {
             var abilitySound = config.GetRandomAbilitySound();

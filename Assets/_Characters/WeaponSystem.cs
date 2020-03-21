@@ -43,21 +43,11 @@ namespace Dragon.Character
 
             else
             {
-                if (target.GetComponent<Character>().GetIsAlive() == false)
-                {
-                    targetIsDead = false;
-                } else
-                {
-                    targetIsDead = true;
-                }
+                var targetHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
+                targetIsDead = targetHealth <= Mathf.Epsilon;
 
-                if (Vector3.Distance(transform.position, target.transform.position) <= currentWeaponConfig.GetAttackRange())
-                {
-                    targetIsOutOfRange = false;
-                } else
-                {
-                    targetIsOutOfRange = true;
-                }
+                var distance = Vector3.Distance(transform.position, target.transform.position) <= currentWeaponConfig.GetAttackRange();
+                targetIsOutOfRange = distance;             
             }
 
             float characterHealth = GetComponent<HealthSystem>().healthAsPercentage;

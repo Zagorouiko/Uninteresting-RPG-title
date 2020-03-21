@@ -14,6 +14,7 @@ namespace Dragon.Character
             var targetHealth = target.GetComponent<HealthSystem>();
             targetHealth.TakeDamage(damageToDeal);
             PlayParticleEffect();
+            PlayAbilityAnimation();
         }        
     }
 }
