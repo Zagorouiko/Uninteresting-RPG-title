@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Dragon.Weapons;
+using System;
 
 namespace Dragon.Character
 {
@@ -25,8 +26,47 @@ namespace Dragon.Character
         void Start()
         {
             character = GetComponent<Character>();
+            animator = GetComponent<Animator>();
             SetAttackAnimation();
             PutWeaponInHand(currentWeaponConfig);
+        }
+
+        private void Update()
+        {
+            bool targetIsDead;
+            bool targetIsOutOfRange;
+            if (target == null)
+            {
+                targetIsDead = false;
+                targetIsOutOfRange = false;
+            }
+
+            else
+            {
+                if (target.GetComponent<Character>().GetIsAlive() == false)
+                {
+                    targetIsDead = false;
+                } else
+                {
+                    targetIsDead = true;
+                }
+
+                if (Vector3.Distance(transform.position, target.transform.position) <= currentWeaponConfig.GetAttackRange())
+                {
+                    targetIsOutOfRange = false;
+                } else
+                {
+                    targetIsOutOfRange = true;
+                }
+            }
+
+            float characterHealth = GetComponent<HealthSystem>().healthAsPercentage;
+            bool characterIsDead = (characterHealth <= Mathf.Epsilon);
+
+            if (characterIsDead || targetIsOutOfRange || targetIsDead)
+            {
+                StopAllCoroutines();
+            }
         }
 
         public WeaponConfig GetCurrentWeaponConfig()
@@ -36,26 +76,71 @@ namespace Dragon.Character
 
         private void SetAttackAnimation()
         {
-            var animatorOverrideController = character.GetAnimatorController();
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = animatorOverrideController;
-            animatorOverrideController["Default Attack"] = currentWeaponConfig.GetAttackAnimation();
+            if (!character.GetAnimatorController())
+            {
+                Debug.Break();
+                Debug.LogAssertion("Please provide " + gameObject + " with an animator override controller.");
+            } else
+            {
+                var animatorOverrideController = character.GetAnimatorController();
+                animator.runtimeAnimatorController = animatorOverrideController;
+                animatorOverrideController["Default Attack"] = currentWeaponConfig.GetAttackAnimation();
+            }            
         }
 
         private void AttackTarget(EnemyAI enemy)
         {
             SetAttackAnimation();
-            if (Time.time - lastHitTime > currentWeaponConfig.GetminTimeBetweenHits())
-            {
-                animator.SetTrigger("New Trigger");
-                enemy.TakeDamage(CalculateDamage());
-                lastHitTime = Time.time;
-            }
+            
         }
 
         public void AttackTarget(GameObject targetToAttack)
         {
             target = targetToAttack;
+            //StartCoroutine(AttackTargetRepeatedly());
+        }
+
+        IEnumerator AttackTargetRepeatedly() //crashing here
+        {
+            bool attackerStillAlive = GetComponent<HealthSystem>().healthAsPercentage >= Mathf.Epsilon;
+            bool targetStillAlive = target.GetComponent<HealthSystem>().healthAsPercentage >= Mathf.Epsilon;
+
+            while (attackerStillAlive && targetStillAlive)
+            {
+                
+                if (Time.time - lastHitTime > currentWeaponConfig.GetminTimeBetweenHits())
+                {
+                    float weaponHitPeriod = currentWeaponConfig.GetminTimeBetweenHits();
+                    float timeToWait = weaponHitPeriod * character.GetAnimSpeedMultiplier();
+
+                    bool isTimeToHitAgain = Time.time - lastHitTime > timeToWait;
+
+                    if (isTimeToHitAgain)
+                    {
+                        AttackTargetOnce();
+                        lastHitTime = Time.time;
+                    }                  
+                    yield return new WaitForSeconds(timeToWait);
+                }
+            }
+        }
+
+        private void AttackTargetOnce()
+        {
+            transform.LookAt(target.transform);
+            
+            animator.SetTrigger("New Trigger");
+            SetAttackAnimation();
+
+            float damageDelay = 1f;
+            StartCoroutine(DamageAfterDelay(damageDelay));          
+        }
+
+        IEnumerator DamageAfterDelay(float damageDelay)
+        {
+            yield return new WaitForSeconds(damageDelay);
+            var enemyHealth = target.GetComponent<HealthSystem>();
+            enemyHealth.TakeDamage(CalculateDamage());        
         }
 
         private float CalculateDamage()

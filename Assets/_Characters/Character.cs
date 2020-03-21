@@ -73,6 +73,16 @@ namespace Dragon.Character
             navMeshAgent.stoppingDistance = NavMeshAgentStoppingDistance;
         }
 
+        public bool GetIsAlive()
+        {
+            return isAlive;
+        }
+
+        public float GetAnimSpeedMultiplier()
+        {
+            return animator.speed;
+        }
+
         void Update()
         {
             if (navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance && isAlive)

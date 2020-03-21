@@ -1419,6 +1419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseRadius: 3.75
+  patrolPath: {fileID: 0}
+  nextWaypointIndex: 0
 --- !u!114 &1155127446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2789,6 +2791,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2986847023219590123, guid: 8519fa41596d2294881e2cdb84f36177,
+        type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1371661119}
     - target: {fileID: 7611177685427148581, guid: 8519fa41596d2294881e2cdb84f36177,
         type: 3}
       propertyPath: m_LocalPosition.x

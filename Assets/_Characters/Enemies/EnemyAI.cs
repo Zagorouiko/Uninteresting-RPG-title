@@ -6,6 +6,7 @@ using System;
 
 namespace Dragon.Character
 {
+    [RequireComponent(typeof(HealthSystem))]
     [RequireComponent(typeof(WeaponSystem))]
     [RequireComponent(typeof(Character))]
     public class EnemyAI : MonoBehaviour

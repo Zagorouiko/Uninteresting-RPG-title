@@ -219,6 +219,13 @@ GameObject:
   - component: {fileID: 7611177685427148581}
   - component: {fileID: 857584816}
   - component: {fileID: 8067945709952831304}
+  - component: {fileID: 1155127445}
+  - component: {fileID: 1155127446}
+  - component: {fileID: 1155127447}
+  - component: {fileID: 2986847023219590123}
+  - component: {fileID: 4041147016875328424}
+  - component: {fileID: 7995252461744528734}
+  - component: {fileID: 5121363575044296896}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -272,6 +279,147 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1155127445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c1fd327d1c0f3428ca3a79c38f7fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseRadius: 3.75
+  patrolPath: {fileID: 0}
+  nextWaypointIndex: 0
+--- !u!114 &1155127446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8f2f659e7f34244a0ca425b3dcbc84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSpatialBlend: 0.5
+  capsuleColliderCenter: {x: 0, y: 1.03, z: 0}
+  capsuleColliderRadius: 2
+  capsuleColliderHeight: 2.03
+  animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  animatorOverrideController: {fileID: 22100000, guid: 496bec6ab15137245a11d1d3e9772941,
+    type: 2}
+  characterAvatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+  moveSpeedMultiplier: 2
+  animationSpeedMultiplier: 2
+  movingTurnSpeed: 360
+  stationaryTurnSpeed: 180
+  moveThreshold: 1
+  navMeshAgentSteeringSpeed: 1
+  NavMeshAgentStoppingDistance: 1.3
+--- !u!114 &1155127447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709ddabec802bd543a4acabb04dd2259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 25
+  currentWeaponConfig: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3,
+    type: 2}
+  weaponSocket: {fileID: 1638397874}
+  criticalHitChance: 0.1
+  criticalHitMultiplier: 1.25
+--- !u!114 &2986847023219590123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19954ccc1c332304eacb28464d15a780, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  damageSounds:
+  - {fileID: 8300000, guid: a5d82669753553a4abc87dbd1cb8fd9e, type: 3}
+  - {fileID: 8300000, guid: 43a6aaa8de250c746965532c81ed1b43, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: 20d5a61766af91742ba1e013399e23cd, type: 3}
+  - {fileID: 8300000, guid: d07db9252af29344e875ee9b71e8861f, type: 3}
+  currentHealthPoints: 100
+  maxHealthPoints: 100
+--- !u!114 &4041147016875328424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c1fd327d1c0f3428ca3a79c38f7fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseRadius: 3.75
+  patrolPath: {fileID: 0}
+  nextWaypointIndex: 0
+--- !u!114 &7995252461744528734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8f2f659e7f34244a0ca425b3dcbc84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSourceSpatialBlend: 0.5
+  capsuleColliderCenter: {x: 0, y: 1.03, z: 0}
+  capsuleColliderRadius: 2
+  capsuleColliderHeight: 2.03
+  animatorController: {fileID: 9100000, guid: e2cf68ff4b1ffda45a77f7307dd789b9, type: 2}
+  animatorOverrideController: {fileID: 22100000, guid: 496bec6ab15137245a11d1d3e9772941,
+    type: 2}
+  characterAvatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
+  moveSpeedMultiplier: 2
+  animationSpeedMultiplier: 2
+  movingTurnSpeed: 360
+  stationaryTurnSpeed: 180
+  moveThreshold: 1
+  navMeshAgentSteeringSpeed: 1
+  NavMeshAgentStoppingDistance: 1.3
+--- !u!114 &5121363575044296896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7611177685427178309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 709ddabec802bd543a4acabb04dd2259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 25
+  currentWeaponConfig: {fileID: 11400000, guid: 5c1231e70b0f70245ac6b2d96a0ca4e3,
+    type: 2}
+  weaponSocket: {fileID: 1638397874}
+  criticalHitChance: 0.1
+  criticalHitMultiplier: 1.25
 --- !u!1 &7611177685427178311
 GameObject:
   m_ObjectHideFlags: 0
