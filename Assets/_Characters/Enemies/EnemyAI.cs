@@ -19,7 +19,7 @@ namespace Dragon.Character
 
         bool isAttacking = false;
         float currentWeaponRange;    
-        PlayerMovement player;
+        PlayerControl player;
         Character character;
 
         float distanceToPlayer;
@@ -38,7 +38,7 @@ namespace Dragon.Character
         private void Start()
         {
             character = GetComponent<Character>();
-            player = FindObjectOfType<PlayerMovement>();           
+            player = FindObjectOfType<PlayerControl>();           
         }
 
         private void Update()

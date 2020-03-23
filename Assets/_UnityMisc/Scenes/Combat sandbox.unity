@@ -1661,6 +1661,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1763682771}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1260893314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260893313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d5fc98a5a2ecb4d9b9f9b68fac8f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1260893321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,7 +2536,8 @@ PrefabInstance:
       propertyPath: energyOrb
       value: 
       objectReference: {fileID: 1982320925}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6038069576979120069, guid: f4c7e272965ceef41af483232da979db, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f4c7e272965ceef41af483232da979db, type: 3}
 --- !u!1001 &1786319072
 PrefabInstance:

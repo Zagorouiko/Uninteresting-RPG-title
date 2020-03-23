@@ -35,6 +35,7 @@ namespace Dragon.Character
                 UpdateEnergyBar();
             }                   
         }
+      
 
         void AttachInitialAbilities()
         {
