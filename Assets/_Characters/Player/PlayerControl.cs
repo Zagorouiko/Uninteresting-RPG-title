@@ -11,7 +11,6 @@ namespace Dragon.Character
     public class PlayerControl : MonoBehaviour
     {
         SpecialAbilities abilities;
-        EnemyAI enemy;
         Character character;
         WeaponSystem weaponSystem;
 
@@ -56,16 +55,14 @@ namespace Dragon.Character
             }
         }
 
-        private void OnMouseOverEnemy(EnemyAI enemyToSet)
+        private void OnMouseOverEnemy(EnemyAI enemy)
         {
-            enemy = enemyToSet;
             if (Input.GetMouseButton(0) && IsTargetInRange(enemy))
             {
                 weaponSystem.AttackTarget(enemy.gameObject);
 
             } else if (Input.GetMouseButton(0) && !IsTargetInRange(enemy)) {
 
-                MoveAndAttack(enemy);
                 StartCoroutine(MoveAndAttack(enemy));
             }
             else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy))
@@ -73,27 +70,32 @@ namespace Dragon.Character
                 abilities.AttemptSpecialAbility(0, enemy.gameObject);
             }
 
-            else if (Input.GetMouseButton(0) && !IsTargetInRange(enemy))
+            else if (Input.GetMouseButton(1) && !IsTargetInRange(enemy))
             {
                 StartCoroutine(MoveAndPowerAttack(enemy));
             }
         }
 
-        IEnumerator MoveAndPowerAttack(EnemyAI enemy)
+        IEnumerator MoveToTarget(EnemyAI enemy)
         {
             character.SetDestination(enemy.transform.position);
+            while (!IsTargetInRange(enemy))
+            {
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        IEnumerator MoveAndPowerAttack(EnemyAI enemy)
+        {
+            yield return StartCoroutine(MoveToTarget(enemy));
             abilities.AttemptSpecialAbility(0, enemy.gameObject);
-            yield return new WaitForSeconds(1f);
         }
 
         IEnumerator MoveAndAttack(EnemyAI enemy)
         {
-            character.SetDestination(enemy.transform.position);
-            while (!IsTargetInRange)
-            {
-                yield return new WaitForEndFrame();
-            }
-          
+            yield return StartCoroutine(MoveToTarget(enemy));
+            weaponSystem.AttackTarget(enemy.gameObject);
         }
 
         private bool IsTargetInRange(EnemyAI enemy)

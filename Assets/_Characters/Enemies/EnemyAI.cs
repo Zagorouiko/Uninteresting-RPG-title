@@ -67,7 +67,7 @@ namespace Dragon.Character
         IEnumerator Patrol()
         {
             state = State.patrolling;
-            while (true)
+            while (patrolPath != null)
             {
                 Vector3 nextWaypointPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
                 character.SetDestination(nextWaypointPos);
