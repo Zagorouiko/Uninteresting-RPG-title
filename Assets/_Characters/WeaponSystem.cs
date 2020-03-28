@@ -83,6 +83,10 @@ namespace Dragon.Character
             SetAttackAnimation();
             
         }
+        public void StopAttacking()
+        {
+            StopAllCoroutines();
+        }
 
         public void AttackTarget(GameObject targetToAttack)
         {

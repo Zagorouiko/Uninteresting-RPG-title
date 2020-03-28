@@ -21,6 +21,7 @@ namespace Dragon.Character
         float currentWeaponRange;    
         PlayerControl player;
         Character character;
+        WeaponSystem weaponSystem;
 
         float distanceToPlayer;
 
@@ -38,7 +39,8 @@ namespace Dragon.Character
         private void Start()
         {
             character = GetComponent<Character>();
-            player = FindObjectOfType<PlayerControl>();           
+            player = FindObjectOfType<PlayerControl>();
+            weaponSystem = GetComponent<WeaponSystem>();
         }
 
         private void Update()
@@ -50,18 +52,28 @@ namespace Dragon.Character
             if (distanceToPlayer > chaseRadius && state != State.patrolling)
             {
                 StopAllCoroutines();
+                weaponSystem.StopAttacking();
                 StartCoroutine(Patrol());
             }
             if (distanceToPlayer <= chaseRadius && state != State.chasing)
             {
                 StopAllCoroutines();
+                weaponSystem.StopAttacking();
                 StartCoroutine(ChasePlayer());
             }
             if (distanceToPlayer <= currentWeaponRange && state != State.attacking)
             {
                 StopAllCoroutines();
-                state = State.attacking;
+                StartCoroutine(AttackPlayer());                
             }
+        }
+
+        IEnumerator AttackPlayer()
+        {
+            state = State.attacking;
+            var weaponConfig = weaponSystem.GetCurrentWeaponConfig();
+            weaponSystem.AttackTarget(player.gameObject);
+            yield return new WaitForSeconds(weaponConfig.GetminTimeBetweenHits());
         }
 
         IEnumerator Patrol()
