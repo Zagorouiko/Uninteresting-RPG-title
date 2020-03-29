@@ -69,7 +69,6 @@ namespace Dragon.Character
 
         IEnumerator KillCharacter()
         {
-            StopAllCoroutines();
             characterMovement.Kill();           
             animator.SetTrigger(DEATH_TRIGGER);
 

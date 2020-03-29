@@ -126,7 +126,7 @@ namespace Dragon.Character
             animator.SetTrigger("New Trigger");
             SetAttackAnimation();
 
-            float damageDelay = 1f;
+            float damageDelay = currentWeaponConfig.GetDamageDelay();
             StartCoroutine(DamageAfterDelay(damageDelay));          
         }
 

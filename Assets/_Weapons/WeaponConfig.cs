@@ -11,6 +11,7 @@ namespace Dragon.Weapons
         [SerializeField] float minTimeBetweenHits;
         [SerializeField] float attackRange;
         [SerializeField] float additionalDamage;
+        [SerializeField] float damageDelay = .5f;
 
         [SerializeField] GameObject weaponPrefab;
         [SerializeField] AnimationClip attackAnimation;
@@ -18,6 +19,11 @@ namespace Dragon.Weapons
         public GameObject GetWeaponPrefab()
         {
             return weaponPrefab;
+        }
+
+        public float GetDamageDelay()
+        {
+            return damageDelay;
         }
 
         public AnimationClip GetAttackAnimation()
