@@ -15,11 +15,6 @@ namespace Dragon.Weapons {
             this.shooter = shooter;
         }
 
-        private void Start()
-        {
-
-        }
-
         public void SetdamagedCaused(float damage)
         {
             damageCaused = damage;
